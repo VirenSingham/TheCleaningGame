@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Transform cameraTransform;
     [SerializeField] float mouseSens = 3f;
-    [SerializeField] float movementSpeed = 4f;
+    [SerializeField] float walkMoveSpeed = 4f;
+    [SerializeField] float crouchMoveSpeed = 4f;
+    float currentMoveSpeed;
+    bool isCrouching;
 
     Vector2 look;
     Rigidbody rb;
@@ -20,11 +24,19 @@ public class PlayerMovement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        currentMoveSpeed = walkMoveSpeed;
     }
 
     void Update()
     {
         updateCamera();
+
+        //Crouch Functionality
+        //check for key press
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Crouch();
+        }
     }
 
     private void FixedUpdate()
@@ -53,6 +65,27 @@ public class PlayerMovement : MonoBehaviour
         input += transform.right * x;
         input = Vector3.ClampMagnitude(input, 1f);
 
-        rb.MovePosition(transform.position + input * movementSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(transform.position + input * currentMoveSpeed * Time.fixedDeltaTime);
+    }
+    
+    void Crouch()
+    {
+        //if Crouching, Stand
+          if (isCrouching == true)
+          {
+            //change our scale
+              transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 1.5f, transform.localScale.z);
+              isCrouching = false;
+              currentMoveSpeed = walkMoveSpeed;
+          }
+        //if Standing, Crouch
+          else if (isCrouching == false)
+          {
+            //change our scale
+              transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 1.5f, transform.localScale.z);
+              isCrouching = true;
+              currentMoveSpeed = crouchMoveSpeed;
+              rb.AddForce((transform.up * -1) * 2f, ForceMode.Impulse);
+          }
     }
 }
