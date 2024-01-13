@@ -7,15 +7,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform cameraTransform;
     [SerializeField] float mouseSens = 3f;
     [SerializeField] float movementSpeed = 4f;
-    [SerializeField] float mass = 1f;
 
     Vector2 look;
-    Vector3 velocity;
-    CharacterController controller;
+    Rigidbody rb;
 
     private void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Start()
@@ -26,8 +24,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        updateGravity();
         updateCamera();
+    }
+
+    private void FixedUpdate()
+    {
         updateMovement();
     }
 
@@ -52,12 +53,6 @@ public class PlayerMovement : MonoBehaviour
         input += transform.right * x;
         input = Vector3.ClampMagnitude(input, 1f);
 
-        controller.Move((input * movementSpeed + velocity) * Time.deltaTime);
-    }
-
-    void updateGravity()
-    {
-        var gravity = Physics.gravity * mass * Time.deltaTime;
-        velocity.y = controller.isGrounded ? -1f : velocity.y + gravity.y;
+        rb.MovePosition(transform.position + input * movementSpeed * Time.fixedDeltaTime);
     }
 }
