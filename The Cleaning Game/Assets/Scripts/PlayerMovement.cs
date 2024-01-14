@@ -46,13 +46,16 @@ public class PlayerMovement : MonoBehaviour
 
     void updateCamera()
     {
-        look.x += Input.GetAxis("Mouse X") * mouseSens;
-        look.y += Input.GetAxis("Mouse Y") * mouseSens;
+        if (Application.isFocused)
+        {
+            look.x += Input.GetAxis("Mouse X") * mouseSens;
+            look.y += Input.GetAxis("Mouse Y") * mouseSens;
 
-        look.y = Mathf.Clamp(look.y, -90f, 90f);
+            look.y = Mathf.Clamp(look.y, -90f, 90f);
 
-        cameraTransform.localRotation = Quaternion.Euler(-look.y, 0, 0);
-        transform.localRotation = Quaternion.Euler(0, look.x, 0);
+            cameraTransform.localRotation = Quaternion.Euler(-look.y, 0, 0);
+            transform.localRotation = Quaternion.Euler(0, look.x, 0);
+        }
     }
 
     void updateMovement()
