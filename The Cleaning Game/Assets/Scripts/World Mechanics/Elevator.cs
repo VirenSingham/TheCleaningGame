@@ -86,7 +86,7 @@ public class Elevator : MonoBehaviour
                     isMoving = false;
                     isBottomFloor = false;
                     //remove player from parent and return it to important stuff
-                    playerRef.transform.SetParent(importantStuffHolder.transform, true);
+                    //playerRef.transform.SetParent(importantStuffHolder.transform, true);
                 }
             }
             //if the elevator is going to the bottom floor (closet)
@@ -101,7 +101,7 @@ public class Elevator : MonoBehaviour
                     isMoving = false;
                     isBottomFloor = true;
                     //remove player from parent and return it to important stuff
-                    playerRef.transform.SetParent(importantStuffHolder.transform, true);
+                    //playerRef.transform.SetParent(importantStuffHolder.transform, true);
                 }
             }
         }
@@ -125,7 +125,7 @@ public class Elevator : MonoBehaviour
                 isMoving = true;
             }
             //set the player to be a child of elevator
-            playerRef.transform.SetParent(gameObject.transform, true);
+            //playerRef.transform.SetParent(gameObject.transform, true);
         }
     }
 
