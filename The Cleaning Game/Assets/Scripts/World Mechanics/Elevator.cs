@@ -20,6 +20,7 @@ public class Elevator : MonoBehaviour
     [Header("Child Ref")]
     [SerializeField] GameObject importantStuffHolder;
     [SerializeField] GameObject playerRef;
+    float playerMass;
 
     //Elevator behavior variables
     [SerializeField] [Tooltip("Speed of the Elevators Movement")] 
@@ -44,6 +45,7 @@ public class Elevator : MonoBehaviour
     void Start()
     {
         isMoving = false;
+        playerMass = playerRef.GetComponent<Rigidbody>().mass;
 
         //set our values based on whether we are starting on the bottom floor
         if (isStartingBottomFloor)
@@ -86,7 +88,7 @@ public class Elevator : MonoBehaviour
                     isMoving = false;
                     isBottomFloor = false;
                     //remove player from parent and return it to important stuff
-                    //playerRef.transform.SetParent(importantStuffHolder.transform, true);
+                    playerRef.transform.SetParent(importantStuffHolder.transform, true);
                 }
             }
             //if the elevator is going to the bottom floor (closet)
@@ -101,8 +103,13 @@ public class Elevator : MonoBehaviour
                     isMoving = false;
                     isBottomFloor = true;
                     //remove player from parent and return it to important stuff
-                    //playerRef.transform.SetParent(importantStuffHolder.transform, true);
+                    playerRef.transform.SetParent(importantStuffHolder.transform, true);
                 }
+            }
+
+            if (gameObject.GetComponent<Rigidbody>().velocity.y > elevationSpeed) 
+            {
+                gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, elevationSpeed, 0);
             }
         }
     }
@@ -125,7 +132,7 @@ public class Elevator : MonoBehaviour
                 isMoving = true;
             }
             //set the player to be a child of elevator
-            //playerRef.transform.SetParent(gameObject.transform, true);
+            playerRef.transform.SetParent(gameObject.transform, true);
         }
     }
 
