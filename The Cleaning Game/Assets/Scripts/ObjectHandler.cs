@@ -9,44 +9,64 @@ public class ObjectHandling : MonoBehaviour
     [SerializeField] LayerMask pickupLayer;
     [SerializeField] float pickupRange = 10f;
     [SerializeField] Transform handLocation;
-    [SerializeField] SpringJoint handJoint;
+    [SerializeField] HingeJoint handJoint;
+    [SerializeField] float throwSpeed = 1;
 
     bool isHoldingItem;
     GameObject heldItem = null;
 
     RaycastHit hit;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
-        highlightPickup();
+        pickupHandler();
+        dragHandler();
+    }
 
+    /*************** Drag ***************/
+    void dragHandler()
+    {
+
+    }
+
+    /*************** Pickups ***************/
+    /*
+     * Handles the behaviours related to picking
+     * up and throwing items.
+     */
+    void pickupHandler()
+    {
         if (Input.GetMouseButtonDown(0) && !isHoldingItem)
             attemptPickup();
 
         else if (Input.GetMouseButtonDown(0) && isHoldingItem)
-            dropHeldItem();
-    }
-
-    void dropHeldItem()
-    {
-        Physics.IgnoreCollision(playerCollider, hit.collider, false);
-        isHoldingItem = false;
-        handJoint.connectedBody = null;
-        heldItem = null;
+            throwHeldItem();
     }
 
     /*
-     * STUB
-     * Highlights pickup that player is aiming 
-     * at for clarity
+     * Throwing the held item
      */
-    void highlightPickup()
+    void throwHeldItem()
     {
+        // re-enable collisions, disconnect from hand
+        Physics.IgnoreCollision(playerCollider, hit.collider, false);
+        handJoint.connectedBody = null;
+
+        // Reset relevant bools
+        isHoldingItem = false;
+        heldItem = null;
+
+        hit.rigidbody.AddForce(getThrowDirection() * throwSpeed);
+    }
+
+    /*
+     * Made this function in case I want the throw direction
+     * to be influenced by the players velocity, which would
+     * involve making player movement velocity based.
+     */
+    Vector3 getThrowDirection()
+    {
+        return handLocation.forward;
     }
 
     /*
@@ -70,13 +90,14 @@ public class ObjectHandling : MonoBehaviour
     {
         Physics.IgnoreCollision(playerCollider, hit.collider, true);
         isHoldingItem = true;
-        handJoint.connectedBody = hit.rigidbody;
 
         // Translate the held item to the hand
-        /*hit.transform.position = handLocation.position;*/
         hit.rigidbody.MovePosition(handLocation.position);
 
         // Mark Down the held item
         heldItem = hit.collider.gameObject;
+
+        // Connect held item to joint
+        handJoint.connectedBody = hit.rigidbody;
     }
 }
