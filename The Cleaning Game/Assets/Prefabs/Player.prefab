@@ -533,10 +533,14 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 1024
+  dragLayer:
+    serializedVersion: 2
+    m_Bits: 3072
   pickupRange: 3
   handLocation: {fileID: 1608726796819916900}
-  handJoint: {fileID: 9188918003372631039}
-  throwSpeed: 500
+  pickupJoint: {fileID: 9188918003372631039}
+  dragJoint: {fileID: 7970057021147183747}
+  throwSpeed: 1000
 --- !u!1 &8580483678010868859
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +706,6 @@ GameObject:
   - component: {fileID: 245103755577393244}
   - component: {fileID: 7970057021147183747}
   - component: {fileID: 9188918003372631039}
-  - component: {fileID: 1171387390838675342}
   m_Layer: 0
   m_Name: HoldPoint
   m_TagString: Untagged
@@ -765,7 +768,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
-  m_Spring: 50
+  m_Spring: 30
   m_Damper: 0
   m_MinDistance: 0
   m_MaxDistance: 0
@@ -809,21 +812,6 @@ HingeJoint:
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
---- !u!138 &1171387390838675342
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8906095674579931848}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0

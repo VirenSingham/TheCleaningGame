@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 486263554}
   - component: {fileID: 486263558}
   m_Layer: 10
-  m_Name: TestObj
+  m_Name: SmolCube
   m_TagString: object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,8 +436,8 @@ GameObject:
   - component: {fileID: 1309082127}
   - component: {fileID: 1309082126}
   - component: {fileID: 1309082125}
-  m_Layer: 10
-  m_Name: TestObj (1)
+  m_Layer: 11
+  m_Name: BeegCube
   m_TagString: object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 1318911577}
   - component: {fileID: 1318911576}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Ramp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -773,7 +773,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 1942718714}
-  - {fileID: 486263557}
   - {fileID: 1318911579}
+  - {fileID: 486263557}
   - {fileID: 1309082129}
   - {fileID: 311681670}

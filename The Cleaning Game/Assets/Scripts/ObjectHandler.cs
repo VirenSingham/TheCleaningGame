@@ -7,13 +7,18 @@ public class ObjectHandling : MonoBehaviour
     [SerializeField] Transform playerFacing;
     [SerializeField] Collider playerCollider;
     [SerializeField] LayerMask pickupLayer;
+    [SerializeField] LayerMask dragLayer;
     [SerializeField] float pickupRange = 10f;
     [SerializeField] Transform handLocation;
-    [SerializeField] HingeJoint handJoint;
+    [SerializeField] HingeJoint pickupJoint;
+    [SerializeField] SpringJoint dragJoint;
     [SerializeField] float throwSpeed = 1;
 
     bool isHoldingItem;
     GameObject heldItem = null;
+
+    bool isDraggingItem;
+    GameObject draggedItem = null;
 
     RaycastHit hit;
 
@@ -23,10 +28,78 @@ public class ObjectHandling : MonoBehaviour
         dragHandler();
     }
 
+    /*************** Helper Functions ***************/
+    Ray generateRayFromCam()
+    {
+        return new Ray(playerFacing.position, playerFacing.forward);
+    }
+
+     /* 
+      * Raycasts to see if the object is within range and isnt already dragged or picked up.
+      * Must Specify the LayerMask for the pickup request.
+      * As a side-effect the hit variable will be updated
+      */
+    bool isObjectInView(LayerMask targetLayerMasks)
+    {
+        bool isObjectInView = Physics.Raycast(generateRayFromCam(), out hit, pickupRange, targetLayerMasks);
+
+        if (!isObjectInView)
+            return false;
+
+        else if (hit.transform.gameObject == heldItem || hit.transform.gameObject == draggedItem)
+            return false;
+
+        else
+            return true;
+    }
+
     /*************** Drag ***************/
+    /*
+     * Handles the behaviours related to dragging
+     */
     void dragHandler()
     {
+        if (Input.GetMouseButtonDown(1) && !isDraggingItem)
+            attemptDrag();
 
+        else if (Input.GetMouseButtonUp(1) && isDraggingItem)
+            stopDrag();
+    }
+
+    /*
+     * Checks to see if the object being clicked can
+     * be dragged and then commences drag.
+     */
+    void attemptDrag()
+    {
+        if (isObjectInView(dragLayer))
+            dragItem();
+    }
+
+    /*
+     * When this is called Dragging is ceased
+     */
+    void stopDrag()
+    {
+        // Reset relevant vars
+        dragJoint.connectedBody = null;
+        isDraggingItem = false;
+        draggedItem = null;
+    }
+
+    /*
+     * Commences drag by attatching targeted item
+     * to spring joint.
+     */
+    void dragItem()
+    {
+        isDraggingItem = true;
+
+        // Mark Down the dragged item
+        draggedItem = hit.collider.gameObject;
+
+        // Connect dragged item to joint
+        dragJoint.connectedBody = hit.rigidbody;
     }
 
     /*************** Pickups ***************/
@@ -50,12 +123,13 @@ public class ObjectHandling : MonoBehaviour
     {
         // re-enable collisions, disconnect from hand
         Physics.IgnoreCollision(playerCollider, hit.collider, false);
-        handJoint.connectedBody = null;
 
-        // Reset relevant bools
+        // Reset relevant vars
+        pickupJoint.connectedBody = null;
         isHoldingItem = false;
         heldItem = null;
 
+        // Give the object some force to "throw"
         hit.rigidbody.AddForce(getThrowDirection() * throwSpeed);
     }
 
@@ -75,9 +149,7 @@ public class ObjectHandling : MonoBehaviour
      */
     void attemptPickup()
     {
-        Ray ray = new Ray(playerFacing.position, playerFacing.forward);
-
-        if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer))
+        if (isObjectInView(pickupLayer))
             pickupItem();
     }
 
@@ -88,7 +160,9 @@ public class ObjectHandling : MonoBehaviour
      */
     void pickupItem()
     {
+        // turn off collisions with player
         Physics.IgnoreCollision(playerCollider, hit.collider, true);
+
         isHoldingItem = true;
 
         // Translate the held item to the hand
@@ -98,6 +172,6 @@ public class ObjectHandling : MonoBehaviour
         heldItem = hit.collider.gameObject;
 
         // Connect held item to joint
-        handJoint.connectedBody = hit.rigidbody;
+        pickupJoint.connectedBody = hit.rigidbody;
     }
 }
