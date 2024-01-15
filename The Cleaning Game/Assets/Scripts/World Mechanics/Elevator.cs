@@ -26,12 +26,14 @@ public class Elevator : MonoBehaviour
     float elevationSpeed;
 
     [SerializeField][Tooltip("Whether the elevator is starting on the bottom floor or not")] 
-    bool isStartingBottomFloor;
+    private bool isStartingBottomFloor;
 
     //private elevator variables
-    bool isBottomFloor;
-    bool isMovingUp;
-    bool isMoving;
+    private bool isBottomFloor;
+    private bool isMovingUp;
+    private bool isMoving;
+
+    [SerializeField] LayerMask doorClose;
 
     //private elevator doors variables
     //are our doors closed?
@@ -54,16 +56,20 @@ public class Elevator : MonoBehaviour
         }    
     }
 
+    private void FixedUpdate()
+    {
+        //update the state of our doors
+        UpdateDoors();
+    }
+
     // Update is called once per frame
     void Update()
     {
-
+        //debug elevator activation. Finished version will trigger this function on raycast player interaction.
         if (Input.GetKeyDown(KeyCode.Space)) 
         { 
             ButtonPressed();
         }
-        //update the state of our doors
-        UpdateDoors();
 
         //if the Elevator is moving
         if (isMoving) 
@@ -80,7 +86,7 @@ public class Elevator : MonoBehaviour
                     isMoving = false;
                     isBottomFloor = false;
                     //remove player from parent and return it to important stuff
-                    playerRef.transform.SetParent(importantStuffHolder.transform);
+                    playerRef.transform.SetParent(importantStuffHolder.transform, true);
                 }
             }
             //if the elevator is going to the bottom floor (closet)
@@ -95,7 +101,7 @@ public class Elevator : MonoBehaviour
                     isMoving = false;
                     isBottomFloor = true;
                     //remove player from parent and return it to important stuff
-                    playerRef.transform.SetParent(importantStuffHolder.transform);
+                    playerRef.transform.SetParent(importantStuffHolder.transform, true);
                 }
             }
         }
@@ -119,7 +125,7 @@ public class Elevator : MonoBehaviour
                 isMoving = true;
             }
             //set the player to be a child of elevator
-            playerRef.transform.SetParent(gameObject.transform);
+            playerRef.transform.SetParent(gameObject.transform, true);
         }
     }
 
@@ -129,20 +135,21 @@ public class Elevator : MonoBehaviour
         if (isMoving)
         {
             isClosed = true;
+            
             // close doors
-            if (!Physics.Raycast(DoorLeftCloseRef.transform.position, DoorLeftCloseRef.transform.right, 0.15f))
+            if (!Physics.Raycast(DoorLeftCloseRef.transform.position, DoorLeftCloseRef.transform.right, 0.15f, doorClose))
             {
+                
                 DoorLeftRef.transform.Translate(transform.right * closeSpeed * Time.deltaTime);
                 DoorRightRef.transform.Translate((transform.right * -1) * closeSpeed * Time.deltaTime);
             }
-            
         }
         //if we are not moving open the elevator doors
         else 
         { 
             isClosed = false;
             //open doors
-            if (!Physics.Raycast(DoorLeftOpenRef.transform.position, DoorLeftOpenRef.transform.right * -1, 0.15f))
+            if (!Physics.Raycast(DoorLeftOpenRef.transform.position, DoorLeftOpenRef.transform.right * -1 ,0.15f, doorClose))
             {
                 DoorLeftRef.transform.Translate((transform.right * -1) * closeSpeed * Time.deltaTime);
                 DoorRightRef.transform.Translate(transform.right * closeSpeed * Time.deltaTime);
