@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 2412466812590980139}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.84, y: 1.75, z: 0.20888992}
+  m_LocalPosition: {x: 0, y: 1.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -533,14 +533,9 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 1024
-  dragLayer:
-    serializedVersion: 2
-    m_Bits: 3072
   pickupRange: 3
   handLocation: {fileID: 1608726796819916900}
-  pickupJoint: {fileID: 9188918003372631039}
   dragJoint: {fileID: 7970057021147183747}
-  throwSpeed: 1000
 --- !u!1 &8580483678010868859
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,7 +700,6 @@ GameObject:
   - component: {fileID: 1608726796819916900}
   - component: {fileID: 245103755577393244}
   - component: {fileID: 7970057021147183747}
-  - component: {fileID: 9188918003372631039}
   m_Layer: 0
   m_Name: HoldPoint
   m_TagString: Untagged
@@ -722,7 +716,7 @@ Transform:
   m_GameObject: {fileID: 8906095674579931848}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0.75, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -778,43 +772,4 @@ SpringJoint:
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 99999
-  m_ConnectedMassScale: 1
---- !u!59 &9188918003372631039
-HingeJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8906095674579931848}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  serializedVersion: 2
-  m_UseSpring: 1
-  m_Spring:
-    spring: 0
-    damper: 0
-    targetPosition: 0
-  m_UseMotor: 0
-  m_Motor:
-    targetVelocity: 0
-    force: 0
-    freeSpin: 0
-  m_UseLimits: 0
-  m_ExtendedLimits: 0
-  m_UseAcceleration: 0
-  m_Limits:
-    min: 0
-    max: 0
-    bounciness: 0
-    bounceMinVelocity: 0.2
-    contactDistance: 0
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
   m_ConnectedMassScale: 1

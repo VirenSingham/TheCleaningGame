@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.75
       objectReference: {fileID: 0}
+    - target: {fileID: 1608726796819916900, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1731579240819737632, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.84
@@ -185,6 +189,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5216320900750755414, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970057021147183747, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
+      propertyPath: m_Spring
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970057021147183747, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
+      propertyPath: m_MassScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970057021147183747, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
+      propertyPath: m_Tolerance
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970057021147183747, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
+      propertyPath: m_EnablePreprocessing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970057021147183747, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
+      propertyPath: m_AutoConfigureConnectedAnchor
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8445937525942451709, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
@@ -436,7 +460,7 @@ GameObject:
   - component: {fileID: 1309082127}
   - component: {fileID: 1309082126}
   - component: {fileID: 1309082125}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: BeegCube
   m_TagString: object
   m_Icon: {fileID: 0}
