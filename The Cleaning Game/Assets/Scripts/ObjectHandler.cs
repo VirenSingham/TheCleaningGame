@@ -7,28 +7,37 @@ public class ObjectHandling : MonoBehaviour
     [SerializeField] Transform playerFacing;
     [SerializeField] Collider playerCollider;
     [SerializeField] LayerMask pickupLayer;
-    [SerializeField] LayerMask dragLayer;
     [SerializeField] float pickupRange = 10f;
     [SerializeField] Transform handLocation;
-    [SerializeField] HingeJoint pickupJoint;
     [SerializeField] SpringJoint dragJoint;
-    [SerializeField] float throwSpeed = 1;
-
-    bool isHoldingItem;
-    GameObject heldItem = null;
+    [SerializeField] LineRenderer dragRenderer;
 
     bool isDraggingItem;
     GameObject draggedItem = null;
 
     RaycastHit hit;
 
+    private void Start()
+    {
+        // make sure line render is not visible at the start of the game
+        dragRenderer.enabled = false;
+    }
     void Update()
     {
-        pickupHandler();
         dragHandler();
     }
 
     /*************** Helper Functions ***************/
+    Vector3 getHitPosRelativeToBody(RaycastHit passedHit)
+    {
+        return passedHit.point - passedHit.transform.position;
+    }
+
+    Vector3 getLocOfHeldPoint(Vector3 jointAnchorPos, Vector3 draggedItemPos)
+    {
+        return draggedItemPos + jointAnchorPos; 
+    }
+    
     Ray generateRayFromCam()
     {
         return new Ray(playerFacing.position, playerFacing.forward);
@@ -46,7 +55,7 @@ public class ObjectHandling : MonoBehaviour
         if (!isObjectInView)
             return false;
 
-        else if (hit.transform.gameObject == heldItem || hit.transform.gameObject == draggedItem)
+        else if (hit.transform.gameObject == draggedItem)
             return false;
 
         else
@@ -64,6 +73,19 @@ public class ObjectHandling : MonoBehaviour
 
         else if (Input.GetMouseButtonUp(1) && isDraggingItem)
             stopDrag();
+
+        else if (isDraggingItem)
+            renderDragLine();
+    }
+
+    /*
+     * Uses the LineRenderer to make a line 
+     * from the mouse to the picked up item.
+     */
+    void renderDragLine()
+    {
+        dragRenderer.SetPosition(0, handLocation.position);
+        dragRenderer.SetPosition(1, getLocOfHeldPoint(dragJoint.connectedAnchor, draggedItem.transform.position));
     }
 
     /*
@@ -72,19 +94,8 @@ public class ObjectHandling : MonoBehaviour
      */
     void attemptDrag()
     {
-        if (isObjectInView(dragLayer))
+        if (isObjectInView(pickupLayer))
             dragItem();
-    }
-
-    /*
-     * When this is called Dragging is ceased
-     */
-    void stopDrag()
-    {
-        // Reset relevant vars
-        dragJoint.connectedBody = null;
-        isDraggingItem = false;
-        draggedItem = null;
     }
 
     /*
@@ -93,85 +104,31 @@ public class ObjectHandling : MonoBehaviour
      */
     void dragItem()
     {
+        dragRenderer.enabled = true;
         isDraggingItem = true;
 
+        // ignore collisions whilst holding object
+        Physics.IgnoreCollision(hit.collider, playerCollider, true);
+        
         // Mark Down the dragged item
         draggedItem = hit.collider.gameObject;
 
-        // Connect dragged item to joint
+        // Connect dragged item to joint at
+        // the point it was clicked
         dragJoint.connectedBody = hit.rigidbody;
-    }
-
-    /*************** Pickups ***************/
-    /*
-     * Handles the behaviours related to picking
-     * up and throwing items.
-     */
-    void pickupHandler()
-    {
-        if (Input.GetMouseButtonDown(0) && !isHoldingItem)
-            attemptPickup();
-
-        else if (Input.GetMouseButtonDown(0) && isHoldingItem)
-            throwHeldItem();
+        dragJoint.connectedAnchor = getHitPosRelativeToBody(hit);
     }
 
     /*
-     * Throwing the held item
+     * When this is called Dragging is ceased
      */
-    void throwHeldItem()
+    void stopDrag()
     {
-        // re-enable collisions, disconnect from hand
-        Physics.IgnoreCollision(playerCollider, hit.collider, false);
-
         // Reset relevant vars
-        pickupJoint.connectedBody = null;
-        isHoldingItem = false;
-        heldItem = null;
-
-        // Give the object some force to "throw"
-        hit.rigidbody.AddForce(getThrowDirection() * throwSpeed);
-    }
-
-    /*
-     * Made this function in case I want the throw direction
-     * to be influenced by the players velocity, which would
-     * involve making player movement velocity based.
-     */
-    Vector3 getThrowDirection()
-    {
-        return handLocation.forward;
-    }
-
-    /*
-     * Shoots a ray from the camera position and if a
-     * pickup is found in range, pick it up
-     */
-    void attemptPickup()
-    {
-        if (isObjectInView(pickupLayer))
-            pickupItem();
-    }
-
-    /*
-     * Player and the held item ignore collision
-     * Marks down the player is holding an item.
-     * Connects Held Item to the hand joint.
-     */
-    void pickupItem()
-    {
-        // turn off collisions with player
-        Physics.IgnoreCollision(playerCollider, hit.collider, true);
-
-        isHoldingItem = true;
-
-        // Translate the held item to the hand
-        hit.rigidbody.MovePosition(handLocation.position);
-
-        // Mark Down the held item
-        heldItem = hit.collider.gameObject;
-
-        // Connect held item to joint
-        pickupJoint.connectedBody = hit.rigidbody;
+        Physics.IgnoreCollision(hit.collider, playerCollider, false);
+        dragRenderer.enabled = false;
+        dragJoint.connectedBody = null;
+        isDraggingItem = false;
+        draggedItem = null;
     }
 }
