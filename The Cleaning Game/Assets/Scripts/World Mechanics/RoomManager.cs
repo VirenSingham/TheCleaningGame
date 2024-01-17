@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class RoomManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] [Tooltip("The number of deviants that will start in a room")]int startingDeviants;
     int messCount;
     int deviantCount;
+
+    [SerializeField] TextMeshPro messDisplay;
 
     //code for making sure collision runs
     bool hasInitialised = true;
@@ -33,7 +36,9 @@ public class RoomManager : MonoBehaviour
         //ensure deviant count is initialised
         deviantCount = 0;
         StartTimer();
-        
+
+        //TEMPORARILY PUTTING UPDATE TEXT HERE
+        UpdateMessCount();
     }
 
     // Update is called once per frame
@@ -63,7 +68,6 @@ public class RoomManager : MonoBehaviour
     {
         //sort through our list of objects and randomly pick an object to be a deviant.
         //There is definitely a better way to do this that would be more random. But we're going with this for now
-
         for (int i = 0; i < props.Count; i++)
         {
             //if we don't have enough many deviants
@@ -100,11 +104,6 @@ public class RoomManager : MonoBehaviour
 
     }
 
-    void UpdateMessCount()
-    {
-        
-    }
-
     void RandomiseDeviant(GameObject prop)
     {
         //coin flip to see if it will be a deviant or not (will be 0 or 1)
@@ -137,5 +136,10 @@ public class RoomManager : MonoBehaviour
         {
             props.Remove(other.gameObject);
         }
+    }
+
+    void UpdateMessCount()
+    {
+        messDisplay.text = messCount.ToString();
     }
 }
