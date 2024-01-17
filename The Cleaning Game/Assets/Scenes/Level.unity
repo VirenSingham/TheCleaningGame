@@ -8292,6 +8292,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4361986299901229699, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5216320900750755414, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.18
