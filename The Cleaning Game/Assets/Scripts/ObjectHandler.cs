@@ -14,6 +14,7 @@ public class ObjectHandling : MonoBehaviour
 
     bool isDraggingItem;
     GameObject draggedItem = null;
+    GameObject anchorPoint = null;
 
     RaycastHit hit;
 
@@ -31,11 +32,6 @@ public class ObjectHandling : MonoBehaviour
     Vector3 getHitPosRelativeToBody(RaycastHit passedHit)
     {
         return passedHit.point - passedHit.transform.position;
-    }
-
-    Vector3 getLocOfHeldPoint(Vector3 jointAnchorPos, Vector3 draggedItemPos)
-    {
-        return draggedItemPos + jointAnchorPos; 
     }
     
     Ray generateRayFromCam()
@@ -85,7 +81,7 @@ public class ObjectHandling : MonoBehaviour
     void renderDragLine()
     {
         dragRenderer.SetPosition(0, handLocation.position);
-        dragRenderer.SetPosition(1, getLocOfHeldPoint(dragJoint.connectedAnchor, draggedItem.transform.position));
+        dragRenderer.SetPosition(1, anchorPoint.transform.position);
     }
 
     /*
@@ -117,6 +113,11 @@ public class ObjectHandling : MonoBehaviour
         // the point it was clicked
         dragJoint.connectedBody = hit.rigidbody;
         dragJoint.connectedAnchor = getHitPosRelativeToBody(hit);
+
+        // Create an object to act as the visualisation of the anchorpoint
+        anchorPoint = new GameObject("AnchorPoint");
+        anchorPoint.transform.position = hit.point;
+        anchorPoint.transform.SetParent(hit.transform);
     }
 
     /*
@@ -130,5 +131,9 @@ public class ObjectHandling : MonoBehaviour
         dragJoint.connectedBody = null;
         isDraggingItem = false;
         draggedItem = null;
+
+        // Destroy anchorPoint object
+        GameObject.Destroy(anchorPoint);
+        anchorPoint = null;
     }
 }
