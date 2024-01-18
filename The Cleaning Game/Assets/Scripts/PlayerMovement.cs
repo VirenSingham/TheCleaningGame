@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     Vector2 look;
     Rigidbody rb;
 
+    [SerializeField] LayerMask ButtonLayer;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -36,6 +38,18 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Crouch();
+        }
+
+        //Interact Functionality
+        //check for key press
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            RaycastHit hit;
+            Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit , 5f, ButtonLayer);
+            if (hit.collider.gameObject.tag == "Button")
+            {
+                hit.collider.gameObject.GetComponentInParent<Elevator>().ButtonPressed();
+            }
         }
     }
 

@@ -9,10 +9,17 @@ public class RoomManager : MonoBehaviour
     [SerializeField] [Tooltip("DEBUG STUFF DON'T TOUCH")] List<GameObject> props;
     [SerializeField] [Tooltip("Number of Deviants allowed in a room")] int maxDeviants;
     [SerializeField] [Tooltip("The number of deviants that will start in a room")]int startingDeviants;
+
+    //the room manager's assigned room's mess
     int messCount;
+
+    //the total mess of every room
+    static int totalMessCount;
+
     int deviantCount;
 
     [SerializeField] TextMeshPro messDisplay;
+    [SerializeField] TextMeshPro totalMessDisplay;
 
     //code for making sure collision runs
     bool hasInitialised = true;
@@ -141,5 +148,6 @@ public class RoomManager : MonoBehaviour
     void UpdateMessCount()
     {
         messDisplay.text = messCount.ToString();
+        totalMessDisplay.text = totalMessCount.ToString();
     }
 }
