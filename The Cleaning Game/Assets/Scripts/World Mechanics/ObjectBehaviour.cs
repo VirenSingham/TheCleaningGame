@@ -6,8 +6,12 @@ public class ObjectBehaviour : MonoBehaviour
 {
     public bool isDeviant;
 
+    public int value;
+
     bool isDirty;
     bool isDeviantDirty;
+
+    
 
     // Start is called before the first frame update
     void Start()

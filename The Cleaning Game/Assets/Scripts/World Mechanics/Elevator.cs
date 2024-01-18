@@ -67,11 +67,6 @@ public class Elevator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //debug elevator activation. Finished version will trigger this function on raycast player interaction.
-        if (Input.GetKeyDown(KeyCode.Space)) 
-        { 
-            ButtonPressed();
-        }
 
         //if the Elevator is moving
         if (isMoving) 
@@ -114,7 +109,7 @@ public class Elevator : MonoBehaviour
         }
     }
 
-    void ButtonPressed()
+    public void ButtonPressed()
     {
         //if we aren't moving
         if (!isMoving)
