@@ -10814,8 +10814,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   props: []
+  mess: []
   maxDeviants: 3
   startingDeviants: 1
+  isPlayerInRoom: 0
   messDisplay: {fileID: 2005399560}
   totalMessDisplay: {fileID: 1387736046}
 --- !u!65 &532447801
@@ -18299,7 +18301,7 @@ GameObject:
   - component: {fileID: 818803821}
   m_Layer: 0
   m_Name: Room 2
-  m_TagString: Untagged
+  m_TagString: Room1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -20777,7 +20779,7 @@ GameObject:
   - component: {fileID: 961357989}
   - component: {fileID: 961357993}
   m_Layer: 8
-  m_Name: Cylinder
+  m_Name: Button
   m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23560,7 +23562,7 @@ GameObject:
   - component: {fileID: 979679353}
   m_Layer: 0
   m_Name: Room 3
-  m_TagString: Untagged
+  m_TagString: Room1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -25456,7 +25458,7 @@ GameObject:
   - component: {fileID: 1147420788}
   m_Layer: 0
   m_Name: Room 1
-  m_TagString: Untagged
+  m_TagString: Room1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -35461,7 +35463,7 @@ GameObject:
   - component: {fileID: 1780212718}
   m_Layer: 0
   m_Name: Room 4
-  m_TagString: Untagged
+  m_TagString: Room1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -37210,6 +37212,10 @@ PrefabInstance:
     - target: {fileID: 5107608791762293411, guid: a49fe3da5e41361449f49741969b1220, type: 3}
       propertyPath: m_TagString
       value: object
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169071411830652159, guid: a49fe3da5e41361449f49741969b1220, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5477499589728729129, guid: a49fe3da5e41361449f49741969b1220, type: 3}
       propertyPath: m_Mesh
@@ -43050,6 +43056,10 @@ PrefabInstance:
       propertyPath: value
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1980241754836602371, guid: f1dfa1bcf420ddf41997c06ef5463019, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5526145972044884752, guid: f1dfa1bcf420ddf41997c06ef5463019, type: 3}
       propertyPath: m_LocalPosition.x
       value: 70.642815
@@ -43564,6 +43574,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 979678780}
+    - target: {fileID: 5747047369311784881, guid: 16ebf3e5ee1619446bdf4275ff3df556, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6569744973494387294, guid: 16ebf3e5ee1619446bdf4275ff3df556, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -43697,6 +43711,10 @@ PrefabInstance:
     - target: {fileID: 796998083278525791, guid: fa6511f2e2b0b7b4598a4517e85fc53c, type: 3}
       propertyPath: m_TagString
       value: object
+      objectReference: {fileID: 0}
+    - target: {fileID: 912299007901119612, guid: fa6511f2e2b0b7b4598a4517e85fc53c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1718743762943091012, guid: fa6511f2e2b0b7b4598a4517e85fc53c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -44022,6 +44040,10 @@ PrefabInstance:
     - target: {fileID: 5431702325455707221, guid: 5fc5ebb37a4bc4d43bd88e6e090050e3, type: 3}
       propertyPath: value
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431702325455707221, guid: 5fc5ebb37a4bc4d43bd88e6e090050e3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5754418715287788608, guid: 5fc5ebb37a4bc4d43bd88e6e090050e3, type: 3}
       propertyPath: m_Mesh

@@ -7,6 +7,7 @@ using TMPro;
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] [Tooltip("DEBUG STUFF DON'T TOUCH")] List<GameObject> props;
+    [SerializeField] [Tooltip("DEBUG STUFF DON'T TOUCH")] List<GameObject> mess;
     [SerializeField] [Tooltip("Number of Deviants allowed in a room")] int maxDeviants;
     [SerializeField] [Tooltip("The number of deviants that will start in a room")]int startingDeviants;
 
@@ -17,6 +18,8 @@ public class RoomManager : MonoBehaviour
     static int totalMessCount;
 
     int deviantCount;
+
+    [HideInInspector] public bool isPlayerInRoom;
 
     [SerializeField] TextMeshPro messDisplay;
     [SerializeField] TextMeshPro totalMessDisplay;
@@ -133,6 +136,10 @@ public class RoomManager : MonoBehaviour
         {
             props.Add(other.gameObject);
         }
+        else if (other.gameObject.tag == "Player")
+        {
+            isPlayerInRoom = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -142,6 +149,10 @@ public class RoomManager : MonoBehaviour
         if (other.gameObject.tag == "object")
         {
             props.Remove(other.gameObject);
+        }
+        else if (other.gameObject.tag == "Player")
+        {
+            isPlayerInRoom = false;
         }
     }
 
