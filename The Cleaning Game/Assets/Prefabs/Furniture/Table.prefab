@@ -1455,6 +1455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDeviant: 0
   value: 100
+  devianceRange: 10
 --- !u!1 &8400969330324769367
 GameObject:
   m_ObjectHideFlags: 0

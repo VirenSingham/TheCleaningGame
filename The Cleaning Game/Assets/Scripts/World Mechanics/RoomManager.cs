@@ -6,9 +6,9 @@ using TMPro;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] [Tooltip("DEBUG STUFF DON'T TOUCH")] List<GameObject> props;
+    [Tooltip("DEBUG STUFF DON'T TOUCH")] public List<GameObject>props;
     [SerializeField] [Tooltip("DEBUG STUFF DON'T TOUCH")] List<GameObject> mess;
-    [SerializeField] [Tooltip("Number of Deviants allowed in a room")] int maxDeviants;
+    [Tooltip("Number of Deviants allowed in a room")] public int maxDeviants;
     [SerializeField] [Tooltip("The number of deviants that will start in a room")]int startingDeviants;
 
     //the room manager's assigned room's mess
@@ -17,7 +17,7 @@ public class RoomManager : MonoBehaviour
     //the total mess of every room
     static int totalMessCount;
 
-    int deviantCount;
+    [HideInInspector] public int deviantCount;
 
     [HideInInspector] public bool isPlayerInRoom;
 
