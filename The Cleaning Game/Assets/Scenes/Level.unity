@@ -11459,7 +11459,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.9, y: -4.73, z: -10.72}
-  m_LocalScale: {x: 13, y: 4.33, z: 13}
+  m_LocalScale: {x: 13.42, y: 4.33, z: 13.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1147420788}
@@ -11480,6 +11480,7 @@ MonoBehaviour:
   mess: []
   maxDeviants: 3
   startingDeviants: 1
+  deviantCount: 0
   isPlayerInRoom: 0
   messDisplay: {fileID: 2005399560}
   totalMessDisplay: {fileID: 1387736046}
@@ -11644,6 +11645,18 @@ PrefabInstance:
     - target: {fileID: 5107608791762293411, guid: a49fe3da5e41361449f49741969b1220, type: 3}
       propertyPath: m_Name
       value: Chair
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169071411830652159, guid: a49fe3da5e41361449f49741969b1220, type: 3}
+      propertyPath: devianceRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169071411830652159, guid: a49fe3da5e41361449f49741969b1220, type: 3}
+      propertyPath: revealSelfThreshold
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169071411830652159, guid: a49fe3da5e41361449f49741969b1220, type: 3}
+      propertyPath: spreadDeviancyThreshold
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5477499589728729129, guid: a49fe3da5e41361449f49741969b1220, type: 3}
       propertyPath: m_Mesh
