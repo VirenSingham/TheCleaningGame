@@ -12,6 +12,8 @@ TagManager:
   - Button
   - purple
   - mop
+  - waterSpout
+  - bucketWater
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - 
   - Pickup
   - Mess
-  - 
+  - toolRefill
   - 
   - 
   - 
