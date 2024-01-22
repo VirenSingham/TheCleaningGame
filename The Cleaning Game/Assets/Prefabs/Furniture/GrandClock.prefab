@@ -4028,6 +4028,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7605ee57c4c094fb975517244a0d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ground:
+    serializedVersion: 2
+    m_Bits: 64
   isDeviant: 0
   value: 500
   devianceRange: 5

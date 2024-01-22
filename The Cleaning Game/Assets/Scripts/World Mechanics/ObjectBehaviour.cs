@@ -6,6 +6,7 @@ using UnityEngine;
 public class ObjectBehaviour : MonoBehaviour
 {
     Rigidbody rb;
+    public LayerMask ground;
 
     //deviant check values
     public bool isDeviant;
@@ -15,8 +16,9 @@ public class ObjectBehaviour : MonoBehaviour
     public int value;
 
     bool isDirty;
-    int messValue;
     bool isDeviantDirty;
+
+    [SerializeField] public bool isMessy;
 
     //timer values
     bool isTimerRunning;
@@ -41,7 +43,7 @@ public class ObjectBehaviour : MonoBehaviour
     bool hasRevealedSelf = false;
 
     [SerializeField] float devianceRange;
-    
+    [SerializeField] float throwStrength;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +60,11 @@ public class ObjectBehaviour : MonoBehaviour
         if (devianceRange == 0)
         { 
             devianceRange = 5;
+        }
+
+        if (throwStrength == 0) 
+        { 
+            throwStrength = 15;
         }
 
         rb = gameObject.GetComponent<Rigidbody>();
@@ -88,11 +95,19 @@ public class ObjectBehaviour : MonoBehaviour
         {
             TryDeviousAction();
         }
+
+        Vector3 lastTransform = transform.position;
+
+        CheckMessStatus();
+    }
+    private void FixedUpdate()
+    {
+        
     }
 
     void TryDeviousAction()
     {
-        //has the player entered this room before?
+        //has the player entered this room before? Are they currently in the room?
         if (canDoDeviousAct)
         {
             //check if the player is in the room
@@ -139,7 +154,6 @@ public class ObjectBehaviour : MonoBehaviour
                 canDoDeviousAct = true;
             }
         }
-        
     }
 
     //runs behaviour for commiting Deviant Actions
@@ -155,12 +169,13 @@ public class ObjectBehaviour : MonoBehaviour
         //the right number must be the same amount as the amount of devious acts that can be done. Although the right number is not inclusive.
         //the right number being the same as the amount of acts still works because we count zero. So if the right number is 3
         //We have three acts because 0,1,2. are 3 numbers.
-        int rnd = UnityEngine.Random.Range(0, 3);
+        int rnd = UnityEngine.Random.Range(0, 4);
 
         //failed deviant acts do nothing and add nothing to the act count.
         switch (rnd) 
-        { 
-            //spread deviancy to another object
+        {
+            //spread deviancy to another object, Deviancy isn't considered a mess
+            //thus we don't modify the messModifier
             case 0: 
                 {
                     SpreadDeviancy();
@@ -168,18 +183,26 @@ public class ObjectBehaviour : MonoBehaviour
                     break; 
                 }
 
-            //Throw self around to another position. 
+            //Throw self around to another position, thrown objects will automatically check if they are toppled over and add to mess.
+            //thus we don't modify the messModifier
             case 1: 
                 {
                     DeviantSelfThrow();
                     Debug.Log("Threw Self");
                     break;
                 }
-            //create a purple mess puddle nearby
+            //create a purple mess puddle nearby the roomManager automatically adds mess objects to the messCount,
+            //thus we don't modify the messModifier
             case 2:
                 {
                     MakeMess();
                     Debug.Log("Made a Mess");
+                    break;
+                }
+            case 3:
+                {
+                    ThrowOtherObject();
+                    Debug.Log("Threw another Object");
                     break;
                 }
         }
@@ -225,7 +248,9 @@ public class ObjectBehaviour : MonoBehaviour
     void DeviantSelfThrow()
     {
         Vector3 randomDirection = Random.onUnitSphere;
-        rb.AddForce(randomDirection * (7 + rb.mass) , ForceMode.Impulse);
+        Mathf.Abs(randomDirection.y);
+
+        rb.AddForce(randomDirection * (throwStrength + (rb.mass * 2)), ForceMode.Impulse);
         deviantActCounter++;
         spreadCounter++;
     }
@@ -236,19 +261,61 @@ public class ObjectBehaviour : MonoBehaviour
 
     }
 
+    void ThrowOtherObject()
+    {
+        //loop through the room and find objects that are close
+        for (int i = 0; i < roomManager.props.Count; i++)
+        {
+            //check if we are close to the object in the room
+            if (Vector3.Distance(gameObject.transform.position, roomManager.props[i].transform.position) <= devianceRange && gameObject != roomManager.props[i])
+            {
+                //get a random point on a sphere to use as a random direction. 
+                Vector3 randomDirection = Random.onUnitSphere;
+                Mathf.Abs(randomDirection.y);
+
+                //launch the object
+                roomManager.props[i].GetComponent<Rigidbody>().AddForce(randomDirection * (throwStrength + (rb.mass * 2)), ForceMode.Impulse);
+
+                //end our loop by setting i to the size of our list thus ending the loop
+                i = roomManager.props.Count;
+                spreadCounter++;
+                deviantActCounter++;
+            }
+        }
+    }
     //check if we are toppled and messy, then pass it back to the RoomManager
     void CheckMessStatus()
     {
-        //mess value is the value that will be added to the RoomManager when calculating the mess of objects.
-        //keep in mind mathematically this may have issues, such as if an object is messy thus a value of one. Then we fix it and make it a value of zero.
-        //This will mean that the initial mess that was added will still remain and thus make it impossible to fix. Thus we need a method of checking
-        //if an object was messy and now isn't and thus once we should minus from the mess counter whilst leaving the mess value at 0. Hopefully future me understands this cause it's
-        //VERY IMPORTANT.
+        //double check this logic just in case.
+        //if we are toppled over, check if we are standing now.
+        if (isMessy == true && roomManager.props.Contains(gameObject))
+        {
+            //raycast down to check for ground. If it hits the ground we are standing now
+            if (Physics.Raycast(gameObject.transform.position, gameObject.transform.up * -1, 50f, ground))
+            {
+                //adjust messModifier appropriately, and set it to not be messy
+                roomManager.messModifier--;
+                isMessy = false;
+            }
+        }
+        //if we aren't toppled over, check if we are no longer standing upright
+        if (isMessy == false && roomManager.props.Contains(gameObject))
+        {
+            //raycast down to check for ground. if it doesn't hit anything, we are not standing upright.
+            if (!Physics.Raycast(gameObject.transform.position, gameObject.transform.up * -1, 50f, ground))
+            {
+                //adjust messModifier appropriately, and set it to not be messy
+                roomManager.messModifier++;
+                isMessy = true;
+            }
+        }
     }
 
     void RevealDeviancy()
     {
         Debug.Log("Showed I'm a Deviant");
+        gameObject.AddComponent<ParticleSystem>();
+
     }
 
     //Timer functions for randomising deviant activity.
