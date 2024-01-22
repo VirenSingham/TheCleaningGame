@@ -13,10 +13,9 @@ public class Bucket : MonoBehaviour
     [SerializeField] float detectionRange = 0f;
     [SerializeField] LayerMask refillLayer;
     [SerializeField] float flowRate = 0.1f;
+    [SerializeField] float waterLevel;
 
     RaycastHit hit;
-
-    float waterLevel;
 
     private void Start()
     {
@@ -27,21 +26,29 @@ public class Bucket : MonoBehaviour
     {
         changeWaterLevel();
         updateVisualWaterLevel();
+
     }
 
-    // TODO:
+    /*
+     * transforms the water to be at the appropriate height
+     * disables the water object if level = 0
+     */
     void updateVisualWaterLevel()
     {
         float x = waterLevelTrans.localPosition.x;
         float z = waterLevelTrans.localPosition.z;
 
         waterLevelTrans.localPosition = new Vector3(x, waterLevel, z);
+
+        if (waterLevel == 0)
+            waterLevelTrans.gameObject.SetActive(false);
+        else
+            waterLevelTrans.gameObject.SetActive(true);
     }
 
     void changeWaterLevel()
     {
         checkUnderTap();
-        checkDirtyMop();
 
         clampWaterLevel();
     }
@@ -59,11 +66,6 @@ public class Bucket : MonoBehaviour
             waterLevel = highThreshold;
     }
 
-    //TODO:
-    void checkDirtyMop()
-    {
-    }
-
     // If under tap increase level by flowrate 
     void checkUnderTap()
     {
@@ -72,5 +74,20 @@ public class Bucket : MonoBehaviour
             if (hit.collider.CompareTag("waterSpout"))
                 waterLevel += flowRate;
         }
+    }
+
+    public float getWaterLevel()
+    {
+        return waterLevel;
+    }
+
+    public void setWaterLevel(float waterLevel)
+    {
+        this.waterLevel = waterLevel;
+    }
+
+    public float getMaxLevel()
+    {
+        return highThreshold;
     }
 }
