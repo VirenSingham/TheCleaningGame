@@ -11,21 +11,24 @@ public class Mop : MonoBehaviour
 
     [SerializeField] Transform spongeTrans;
     [SerializeField] Rigidbody spongeRb;
-    [SerializeField] float detectionRange;
+    [SerializeField] float dirtDetectionRange;
+    [SerializeField] float waterDetectionRange;
     [SerializeField] float velocityThreshold;
 
     [SerializeField] LayerMask messLayer;
-    [SerializeField] int MaxMessesToCheck;
+    [SerializeField] LayerMask refillLayer;
 
     [SerializeField] float MopDamage;
+    [SerializeField] [Range(0,1)] float WaterConsumptionPercent;
 
     public bool clean = true;
-
+    
+    int MaxChecks = 100;
     String mopTag = "mop";
-
-    RaycastHit hit;
+    String bucketTag = "bucketWater";
 
     List<GameObject> mopables = new List<GameObject>();
+    GameObject targetedBucket;
 
     // Update is called once per frame
     void Update()
@@ -49,12 +52,34 @@ public class Mop : MonoBehaviour
 
     bool isCollidingWater()
     {
-        //TODO: do this method
+        Collider[] refills = new Collider[MaxChecks];
+
+
+        // Find All Colliders close to sponge
+        int refillsFound = Physics.OverlapSphereNonAlloc(spongeTrans.position, waterDetectionRange, refills, refillLayer);
+
+        // Loop through refills for bucket water
+        for (int i = 0; i < refillsFound; i++)
+        {
+            if (refills[i].tag.Equals(bucketTag))
+            {
+                targetedBucket = refills[i].transform.parent.gameObject;
+                return true;
+            }
+        }
+
         return false;
     }
 
+    /*
+     * Changes mop state to clean
+     * reduces water level on bucket
+     */
     void makeClean()
     {
+        Bucket bucket = targetedBucket.GetComponent(typeof(Bucket)) as Bucket;
+        bucket.setWaterLevel(bucket.getWaterLevel() - WaterConsumptionPercent * bucket.getMaxLevel());
+
         clean = true;
         spongeMesh.material = cleanMat;
     }
@@ -92,11 +117,11 @@ public class Mop : MonoBehaviour
     private bool isCollidingPuddle()
     {
         mopables.Clear();
-        Collider[] messes = new Collider[MaxMessesToCheck];
+        Collider[] messes = new Collider[MaxChecks];
 
 
         // Find All Colliders close to sponge
-        int messesToClean = Physics.OverlapSphereNonAlloc(spongeTrans.position, detectionRange, messes, messLayer);
+        int messesToClean = Physics.OverlapSphereNonAlloc(spongeTrans.position, dirtDetectionRange, messes, messLayer);
 
         // Loop through messes for moppable
         for (int i = 0; i < messesToClean; i++)
@@ -116,6 +141,9 @@ public class Mop : MonoBehaviour
         return spongeRb.velocity.magnitude > velocityThreshold;
     }
 
+    /*
+     *  Changes mop state to dirty
+     */
     void makeDirty()
     {
         clean = false;

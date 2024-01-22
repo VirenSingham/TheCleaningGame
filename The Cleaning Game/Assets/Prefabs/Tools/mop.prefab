@@ -52,13 +52,17 @@ MonoBehaviour:
   spongeMesh: {fileID: 3209603632828638550}
   spongeTrans: {fileID: 6381076389194149898}
   spongeRb: {fileID: 8356070372412172956}
-  detectionRange: 0.8
+  dirtDetectionRange: 1
+  waterDetectionRange: 0.5
   velocityThreshold: 5
   messLayer:
     serializedVersion: 2
     m_Bits: 2048
-  MaxMessesToCheck: 100
+  refillLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   MopDamage: 1
+  WaterConsumptionPercent: 0.2
   clean: 1
 --- !u!1 &4329157505271494926
 GameObject:

@@ -929,6 +929,7 @@ GameObject:
   - component: {fileID: 2891092513322748149}
   - component: {fileID: 4471951527669295218}
   - component: {fileID: 4790148742227578172}
+  - component: {fileID: 257937402285113594}
   m_Layer: 0
   m_Name: Water Level
   m_TagString: Untagged
@@ -1014,7 +1015,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 230
+  m_VersionIndex: 233
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1099,6 +1100,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5221568401178457200}
   m_Mesh: {fileID: 0}
+--- !u!65 &257937402285113594
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5221568401178457200}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.81149024, y: 0, z: 1.1979358}
+  m_Center: {x: 0.0047125826, y: 0, z: 0.047127735}
 --- !u!1 &5396180945681152017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,3 +1237,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   flowRate: 0.001
+  waterLevel: 0
