@@ -4033,7 +4033,9 @@ MonoBehaviour:
     m_Bits: 64
   isDeviant: 0
   value: 500
-  devianceRange: 5
+  isMessy: 0
+  devianceRange: 10
+  throwStrength: 15
 --- !u!1 &7043674913505938148
 GameObject:
   m_ObjectHideFlags: 0

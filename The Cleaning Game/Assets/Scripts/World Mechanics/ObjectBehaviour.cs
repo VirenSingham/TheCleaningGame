@@ -18,7 +18,7 @@ public class ObjectBehaviour : MonoBehaviour
     bool isDirty;
     bool isDeviantDirty;
 
-    [SerializeField] public bool isMessy;
+    [HideInInspector] public bool isMessy;
 
     //timer values
     bool isTimerRunning;

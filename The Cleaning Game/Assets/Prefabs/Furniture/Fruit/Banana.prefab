@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4822378497419901309}
   - component: {fileID: 7156317381492319480}
   - component: {fileID: 4123742273432229364}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 8094163818900424059}
   - component: {fileID: 8152513463374926366}
   - component: {fileID: 4823385452540691579}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collision (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 4497541729592361513}
   - component: {fileID: 963444646709391046}
   - component: {fileID: 6523555185800285074}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collision (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 25603259779897871}
   - component: {fileID: 7631750141827017937}
   - component: {fileID: 7899277860736660802}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Banana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
