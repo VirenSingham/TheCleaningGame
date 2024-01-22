@@ -16,7 +16,7 @@ public class Bucket : MonoBehaviour
 
     RaycastHit hit;
 
-    float waterLevel;
+    public float waterLevel;
 
     private void Start()
     {

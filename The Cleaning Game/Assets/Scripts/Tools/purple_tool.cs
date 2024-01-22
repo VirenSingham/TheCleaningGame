@@ -30,7 +30,8 @@ public class purple_mess : MonoBehaviour
         if (isPurpleMess())
         {
             PushClosePickups();
-            GameObject.Destroy(hit.collider.gameObject);
+            Mess mess = hit.collider.gameObject.GetComponent(typeof(Mess)) as Mess;
+            mess.KillMess();
         }
     }
 
