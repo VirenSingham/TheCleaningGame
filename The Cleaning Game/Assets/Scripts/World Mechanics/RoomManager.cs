@@ -11,8 +11,15 @@ public class RoomManager : MonoBehaviour
     [Tooltip("Number of Deviants allowed in a room")] public int maxDeviants;
     [SerializeField] [Tooltip("The number of deviants that will start in a room")]int startingDeviants;
 
-    //the room manager's assigned room's mess
+    //the room manager's assigned room's mess objects. So this is the count of how many mess objects are in the room
     int messCount;
+
+    //messModifier is the added mess via objects that are toppled over for example. So once a object is toppled it will add to this and then minus once set upright.
+    //this value is added to messCount after messCount has been set properly. So when an object causes a mess that is not a physical gameobject. So not a mess puddle. 
+    //Add to the messModifier instead of messCount. This was we can track both independantly but still combine there values.
+    [HideInInspector] public int messModifier;
+
+    [SerializeField] LayerMask messLayer;
 
     //the total mess of every room
     static int totalMessCount;
@@ -47,8 +54,8 @@ public class RoomManager : MonoBehaviour
         deviantCount = 0;
         StartTimer();
 
-        //TEMPORARILY PUTTING UPDATE TEXT HERE
-        UpdateMessCount();
+        
+        
     }
 
     // Update is called once per frame
@@ -71,6 +78,7 @@ public class RoomManager : MonoBehaviour
                 hasInitialised = false;
             }
         }
+        UpdateMessCount();
     }
 
     //Randomise what object is a deviant.
@@ -135,10 +143,18 @@ public class RoomManager : MonoBehaviour
         if (other.gameObject.tag == "object") 
         {
             props.Add(other.gameObject);
+            if (other.gameObject.GetComponent<ObjectBehaviour>().isMessy == true)
+            {
+                messModifier++;
+            }
         }
         else if (other.gameObject.tag == "Player")
         {
             isPlayerInRoom = true;
+        }
+        else if (other.gameObject.layer == messLayer) 
+        { 
+            mess.Add(other.gameObject);
         }
     }
 
@@ -149,15 +165,27 @@ public class RoomManager : MonoBehaviour
         if (other.gameObject.tag == "object")
         {
             props.Remove(other.gameObject);
+
+            if (other.gameObject.GetComponent<ObjectBehaviour>().isMessy == true)
+            {
+                messModifier--;
+            }
         }
         else if (other.gameObject.tag == "Player")
         {
             isPlayerInRoom = false;
         }
+        else if (other.gameObject.layer == messLayer)
+        {
+            mess.Remove(other.gameObject);
+        }
     }
 
     void UpdateMessCount()
     {
+        messCount = mess.Count;
+        messCount += messModifier;
+
         messDisplay.text = messCount.ToString();
         totalMessDisplay.text = totalMessCount.ToString();
     }
