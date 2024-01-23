@@ -53,9 +53,9 @@ public class ObjectBehaviour : MonoBehaviour
 
         //----------------------change deviancy thresholds here----------------------------------
 
-        //DEFAULT IS 4 SPREAD DEVIANCY THRESHOLD AND 6 REVEAL. SET TO 1 FOR DEBUG
-        spreadDeviancyThreshold = 4;
-        revealSelfThreshold = 6;
+        //DEFAULT IS 4 SPREAD DEVIANCY THRESHOLD AND 6 REVEAL.
+        spreadDeviancyThreshold = 3;
+        revealSelfThreshold = 5;
 
         if (devianceRange == 0)
         { 
@@ -288,10 +288,13 @@ public class ObjectBehaviour : MonoBehaviour
     {
         //double check this logic just in case.
         //if we are toppled over, check if we are standing now.
+            Vector3 gameobjectTransformModY = gameObject.transform.position;
+            gameobjectTransformModY.y += 5f;
+
         if (isMessy == true && roomManager.props.Contains(gameObject))
         {
             //raycast down to check for ground. If it hits the ground we are standing now
-            if (Physics.Raycast(gameObject.transform.position, gameObject.transform.up * -1, 50f, ground))
+            if (Physics.Raycast(gameobjectTransformModY, gameObject.transform.up * -1, 50f, ground))
             {
                 //adjust messModifier appropriately, and set it to not be messy
                 roomManager.messModifier--;
@@ -302,7 +305,7 @@ public class ObjectBehaviour : MonoBehaviour
         if (isMessy == false && roomManager.props.Contains(gameObject))
         {
             //raycast down to check for ground. if it doesn't hit anything, we are not standing upright.
-            if (!Physics.Raycast(gameObject.transform.position, gameObject.transform.up * -1, 50f, ground))
+            if (!Physics.Raycast(gameobjectTransformModY, gameObject.transform.up * -1, 50f, ground))
             {
                 //adjust messModifier appropriately, and set it to not be messy
                 roomManager.messModifier++;

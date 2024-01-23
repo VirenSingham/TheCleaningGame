@@ -125,7 +125,7 @@ public class RoomManager : MonoBehaviour
     void RandomiseDeviant(GameObject prop)
     {
         //coin flip to see if it will be a deviant or not (will be 0 or 1)
-        int rnd = UnityEngine.Random.Range(0, 2);
+        int rnd = UnityEngine.Random.Range(0, 3);
         //check if it's a 1, if so it's a deviant
         if (rnd == 1)
         {

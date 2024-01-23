@@ -722,7 +722,7 @@ GameObject:
   - component: {fileID: 1826384370537666418}
   m_Layer: 10
   m_Name: EndTable
-  m_TagString: Untagged
+  m_TagString: object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
