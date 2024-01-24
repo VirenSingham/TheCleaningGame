@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Elevator : MonoBehaviour
+public class Elevator : MonoBehaviour, Activatable
 {
     //references to the top and bottom of the elevator
     [Header("Elevation raycast points")]
@@ -109,7 +109,7 @@ public class Elevator : MonoBehaviour
         }
     }
 
-    public void ButtonPressed()
+    void ButtonPressed()
     {
         //if we aren't moving
         if (!isMoving)
@@ -157,5 +157,10 @@ public class Elevator : MonoBehaviour
                 DoorRightRef.transform.Translate(transform.right * closeSpeed * Time.deltaTime);
             }
         }
+    }
+
+    public void Activate()
+    {
+        ButtonPressed();
     }
 }

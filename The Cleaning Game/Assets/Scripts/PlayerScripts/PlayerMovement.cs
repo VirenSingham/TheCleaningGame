@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (hit.collider.gameObject.tag == "Button")
             {
-                /*hit.collider.gameObject.GetComponentInParent<Elevator>().ButtonPressed();*/
                 hit.collider.gameObject.GetComponent<Button>().Pressed();
             }
         }
