@@ -1242,8 +1242,8 @@ GameObject:
   - component: {fileID: 6017480834329757037}
   - component: {fileID: 4983763865257977179}
   - component: {fileID: 5869519117616891620}
-  - component: {fileID: 2116192161351195778}
   - component: {fileID: -1039051673521826023}
+  - component: {fileID: 2116192161351195778}
   m_Layer: 10
   m_Name: Couch
   m_TagString: object
@@ -1587,26 +1587,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.372681, y: 0.4012169, z: 4.6407585}
   m_Center: {x: 0.12374687, y: 0, z: -0.74740314}
---- !u!114 &2116192161351195778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5804519304500352426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f7605ee57c4c094fb975517244a0d9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ground:
-    serializedVersion: 2
-    m_Bits: 64
-  isDeviant: 0
-  value: 100
-  isMessy: 0
-  devianceRange: 15
-  throwStrength: 15
 --- !u!54 &-1039051673521826023
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1634,6 +1614,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2116192161351195778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5804519304500352426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7605ee57c4c094fb975517244a0d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground:
+    serializedVersion: 2
+    m_Bits: 64
+  isDeviant: 0
+  value: 100
+  isMessy: 0
+  devianceRange: 2
+  throwStrength: 15
 --- !u!1 &6137691088419720176
 GameObject:
   m_ObjectHideFlags: 0

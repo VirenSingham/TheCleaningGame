@@ -6,7 +6,7 @@ using TMPro;
 
 public class RoomManager : MonoBehaviour
 {
-    [Tooltip("DEBUG STUFF DON'T TOUCH")] public List<GameObject>props;
+    [Tooltip("DEBUG STUFF DON'T TOUCH")] public List<GameObject> props;
     [SerializeField] [Tooltip("DEBUG STUFF DON'T TOUCH")] List<GameObject> mess;
     [Tooltip("Number of Deviants allowed in a room")] public int maxDeviants;
     [SerializeField] [Tooltip("The number of deviants that will start in a room")]int startingDeviants;
@@ -18,8 +18,6 @@ public class RoomManager : MonoBehaviour
     //this value is added to messCount after messCount has been set properly. So when an object causes a mess that is not a physical gameobject. So not a mess puddle. 
     //Add to the messModifier instead of messCount. This was we can track both independantly but still combine there values.
     [HideInInspector] public int messModifier;
-
-    [SerializeField] LayerMask messLayer;
 
     //the total mess of every room
     static int totalMessCount;
@@ -53,9 +51,6 @@ public class RoomManager : MonoBehaviour
         //ensure deviant count is initialised
         deviantCount = 0;
         StartTimer();
-
-        
-        
     }
 
     // Update is called once per frame
@@ -112,16 +107,6 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    void SetDeviant()
-    {
-
-    }
-
-    void TriggerDeviantAction()
-    {
-
-    }
-
     void RandomiseDeviant(GameObject prop)
     {
         //coin flip to see if it will be a deviant or not (will be 0 or 1)
@@ -131,7 +116,7 @@ public class RoomManager : MonoBehaviour
         {
             prop.GetComponent<ObjectBehaviour>().isDeviant = true;
             deviantCount++;
-            Debug.Log("IS DEVIANT");
+            Debug.Log("IS DEVIANT: " + prop.name);
         }
     }
 
@@ -139,7 +124,6 @@ public class RoomManager : MonoBehaviour
     {
         //filter objects by tag and add them to the prop list
         //or filter by if they have the object script.
-
         if (other.gameObject.tag == "object") 
         {
             props.Add(other.gameObject);
@@ -152,7 +136,8 @@ public class RoomManager : MonoBehaviour
         {
             isPlayerInRoom = true;
         }
-        else if (other.gameObject.layer == messLayer) 
+        //mess layer check
+        else if (other.gameObject.layer == 11)
         { 
             mess.Add(other.gameObject);
         }
@@ -175,7 +160,8 @@ public class RoomManager : MonoBehaviour
         {
             isPlayerInRoom = false;
         }
-        else if (other.gameObject.layer == messLayer)
+        //mess layer check
+        else if (other.gameObject.layer == 11)
         {
             mess.Remove(other.gameObject);
         }
