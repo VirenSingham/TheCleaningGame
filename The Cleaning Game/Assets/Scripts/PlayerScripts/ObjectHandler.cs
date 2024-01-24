@@ -70,6 +70,9 @@ public class ObjectHandling : MonoBehaviour
         else if (Input.GetMouseButtonUp(1) && isDraggingItem)
             stopDrag();
 
+        else if (isDraggingItem && anchorPoint == null)
+            DragBroken();
+
         else if (isDraggingItem)
             renderDragLine();
     }
@@ -135,5 +138,17 @@ public class ObjectHandling : MonoBehaviour
         // Destroy anchorPoint object
         GameObject.Destroy(anchorPoint);
         anchorPoint = null;
+    }
+
+    /*
+     * Should be called if the held object is unexpectedly deleted
+     */
+    void DragBroken()
+    {
+        // Reset relevant vars
+        dragRenderer.enabled = false;
+        dragJoint.connectedBody = null;
+        isDraggingItem = false;
+        draggedItem = null;
     }
 }

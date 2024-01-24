@@ -2483,7 +2483,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4868
+  m_VersionIndex: 4871
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2598,6 +2598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1406736007614059416}
   - component: {fileID: 5675734268050765568}
+  - component: {fileID: 5721272060178414054}
   m_Layer: 0
   m_Name: Soap Bag
   m_TagString: Untagged
@@ -2648,3 +2649,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5721272060178414054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8657489002961339835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6442b5b25f1d474f8f2f02676feb2ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  breakVelocity: 10
+  ImpactRange: 0.5
+  ExplosionRange: 5
+  messLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  MaxExplosionDamage: 150
