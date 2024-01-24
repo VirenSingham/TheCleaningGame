@@ -1323,6 +1323,7 @@ GameObject:
   - component: {fileID: 5754418715287788608}
   - component: {fileID: 6121376167581325143}
   - component: {fileID: 5431702325455707221}
+  - component: {fileID: 3123742956391690326}
   m_Layer: 10
   m_Name: Dresser
   m_TagString: object
@@ -3128,8 +3129,29 @@ MonoBehaviour:
   isDeviant: 0
   value: 50
   isMessy: 0
-  devianceRange: 10
+  devianceRange: 2
   throwStrength: 15
+--- !u!65 &3123742956391690326
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741759198149211038}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.53, y: 0.1, z: 0.84601593}
+  m_Center: {x: -1.4418144, y: 0.89, z: 0.42300797}
 --- !u!1 &1006867575299542872
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ObjectBehaviour : MonoBehaviour
 {
-    Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
     public LayerMask ground;
 
     //deviant check values
@@ -25,22 +25,19 @@ public class ObjectBehaviour : MonoBehaviour
     float timerDuration;
 
     RoomManager roomManager;
-
+    
+    GameObject purpleMess;
     //Deviant Acts Values
-    //tracks how many devious acts have succeeded
-    int deviantActCounter = 0;
-
-    //tracks how many devious acts we've done. If we spread this will reset to zero
-    int spreadCounter = 0;
-
-    //The amount of devious acts that must be commited before the object can spread deviancy
-    int spreadDeviancyThreshold;
-
-    //The amount of devious acts that will cause the Deviant to reveal itself (coating itself in purple muck)
-    int revealSelfThreshold;
-
-    //has this object revealed itself as a deviant?
-    bool hasRevealedSelf = false;
+    
+    int deviantActCounter = 0; //tracks how many devious acts have succeeded
+    
+    int spreadCounter = 0; //tracks how many devious acts we've done. If we spread this will reset to zero
+    
+    int spreadDeviancyThreshold; //The amount of devious acts that must be commited before the object can spread deviancy
+    
+    int revealSelfThreshold; //The amount of devious acts that will cause the Deviant to reveal itself (coating itself in purple muck)
+    
+    bool hasRevealedSelf = false; //has this object revealed itself as a deviant?
 
     [SerializeField] float devianceRange;
     [SerializeField] float throwStrength;
@@ -59,8 +56,11 @@ public class ObjectBehaviour : MonoBehaviour
 
         if (devianceRange == 0)
         { 
-            devianceRange = 5;
+            devianceRange = 0.5f;
         }
+
+        //DEBUG DELETE LATER
+        devianceRange = 3;
 
         if (throwStrength == 0) 
         { 
@@ -68,6 +68,9 @@ public class ObjectBehaviour : MonoBehaviour
         }
 
         rb = gameObject.GetComponent<Rigidbody>();
+
+        purpleMess = GameObject.Find("purple_mess");
+        Debug.Log(purpleMess.name);
 
         //create an object that is usedto store references so it can find the RoomManager within the hierarchy. Then set it to be the object attached to the script 
         GameObject roomManagerSearcher = gameObject;
@@ -99,10 +102,6 @@ public class ObjectBehaviour : MonoBehaviour
         Vector3 lastTransform = transform.position;
 
         CheckMessStatus();
-    }
-    private void FixedUpdate()
-    {
-        
     }
 
     void TryDeviousAction()
@@ -169,7 +168,21 @@ public class ObjectBehaviour : MonoBehaviour
         //the right number must be the same amount as the amount of devious acts that can be done. Although the right number is not inclusive.
         //the right number being the same as the amount of acts still works because we count zero. So if the right number is 3
         //We have three acts because 0,1,2. are 3 numbers.
-        int rnd = UnityEngine.Random.Range(0, 4);
+
+        //this check is also made in spread deviancy but I can't be bothered to refactor whilst we are time pressured. Not worth the time waste.
+        int rnd;
+        if (spreadCounter >= spreadDeviancyThreshold)
+        {
+            rnd = UnityEngine.Random.Range(0, 4);
+        }
+        else
+        {
+            rnd = UnityEngine.Random.Range(1, 4);
+        }
+
+        //-------------------------------------DEBUG PLEASE DELETE AFTER USE---------------------------------------
+        rnd = 2;
+
 
         //failed deviant acts do nothing and add nothing to the act count.
         switch (rnd) 
@@ -258,7 +271,31 @@ public class ObjectBehaviour : MonoBehaviour
     //Deviant Act: Create a puddle of mess nearby itself. It can only make purple messes.
     void MakeMess()
     {
+        //loop through the room and find objects that are close and not deviants
+        for (int i = 0; i < roomManager.props.Count; i++)
+        {
+            //check if we are close to the object in the room and that it isn't already deviant
+            if (Vector3.Distance(gameObject.transform.position, roomManager.props[i].transform.position) <= devianceRange)
+            {
+                //raycast for the ground so we can set the height of our spawn location properly.
+                RaycastHit hit;
+                Physics.Raycast(roomManager.gameObject.transform.position, roomManager.gameObject.transform.up * -1, out hit, 50f, ground);
 
+                //get the midpoint between the objects
+                Vector3 midPoint = (gameObject.transform.position + roomManager.gameObject.transform.position) / 2;
+
+                //make sure it's height is the same as the floor
+                Vector3 transformModded = midPoint;
+                transformModded.y = hit.transform.position.y;
+
+                Instantiate(purpleMess, transformModded, purpleMess.transform.rotation);
+
+                deviantActCounter++;
+
+                //end our loop by setting i to the size of our list thus ending the loop
+                i = roomManager.props.Count;
+            }
+        }
     }
 
     void ThrowOtherObject()
@@ -273,8 +310,9 @@ public class ObjectBehaviour : MonoBehaviour
                 Vector3 randomDirection = Random.onUnitSphere;
                 Mathf.Abs(randomDirection.y);
 
-                //launch the object
-                roomManager.props[i].GetComponent<Rigidbody>().AddForce(randomDirection * (throwStrength + (rb.mass * 2)), ForceMode.Impulse);
+                //launch the object based on the other objects mass
+                roomManager.props[i].GetComponent<Rigidbody>().AddForce(randomDirection * (throwStrength + (roomManager.props[i].GetComponent<Rigidbody>().mass * 2)), ForceMode.Impulse);
+                Debug.Log("Threw: " + roomManager.props[i].name);
 
                 //end our loop by setting i to the size of our list thus ending the loop
                 i = roomManager.props.Count;
@@ -318,13 +356,12 @@ public class ObjectBehaviour : MonoBehaviour
     {
         Debug.Log("Showed I'm a Deviant");
         gameObject.AddComponent<ParticleSystem>();
-
     }
 
     //Timer functions for randomising deviant activity.
     void StartTimer()
     {
-        float rnd = Random.Range(3, 21);
+        float rnd = Random.Range(3, 16);
         timerDuration = rnd;
         isTimerRunning = true;
     }

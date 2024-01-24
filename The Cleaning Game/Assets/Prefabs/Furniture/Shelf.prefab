@@ -540,6 +540,7 @@ GameObject:
   - component: {fileID: 5741778998182914084}
   - component: {fileID: 2293975973051687759}
   - component: {fileID: 1980241754836602371}
+  - component: {fileID: 875383951442343958}
   m_Layer: 10
   m_Name: Shelf
   m_TagString: object
@@ -2343,8 +2344,29 @@ MonoBehaviour:
   isDeviant: 0
   value: 50
   isMessy: 0
-  devianceRange: 10
+  devianceRange: 2
   throwStrength: 15
+--- !u!65 &875383951442343958
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7900278078153256752}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.8836288, y: 0.11, z: 0.84601593}
+  m_Center: {x: -1.4418144, y: 0.87, z: 0.42300797}
 --- !u!1 &7907219240878386970
 GameObject:
   m_ObjectHideFlags: 0

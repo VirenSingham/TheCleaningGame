@@ -1242,7 +1242,7 @@ MonoBehaviour:
   isDeviant: 0
   value: 300
   isMessy: 0
-  devianceRange: 10
+  devianceRange: 2
   throwStrength: 15
 --- !u!1 &5532096969292694886
 GameObject:
