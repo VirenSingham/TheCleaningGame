@@ -10,7 +10,7 @@ public class BatterySlot : MonoBehaviour, Activatable
 
     Battery attatchedBattery = null;
     bool isHoldingBat = false;
-    [SerializeField] float deactiveTime = 0;
+    float deactiveTime = 0;
 
     private void Update()
     {
@@ -49,6 +49,14 @@ public class BatterySlot : MonoBehaviour, Activatable
     {
         if (isHoldingBattery())
             attatchedBattery.addCharge(charge);
+    }
+
+    protected float GetBatteryCharge()
+    {
+        if (isHoldingBattery())
+            return attatchedBattery.getCharge();
+        
+        return 0;
     }
 
     public bool isReadyToCharge()

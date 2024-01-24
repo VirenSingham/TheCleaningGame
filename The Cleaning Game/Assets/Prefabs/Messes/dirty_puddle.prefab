@@ -1050,4 +1050,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e576516e6e267ad4ea8089718d6837fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  messRenderScale: {fileID: 1380322033705065294}
   health: 100

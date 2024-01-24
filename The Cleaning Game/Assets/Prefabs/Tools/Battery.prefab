@@ -3472,7 +3472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charge: 100
-  slotDetectionRange: 1
+  slotDetectionRange: 0.1
   refillLayer:
     serializedVersion: 2
     m_Bits: 4096

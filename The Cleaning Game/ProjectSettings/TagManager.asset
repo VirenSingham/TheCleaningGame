@@ -15,6 +15,7 @@ TagManager:
   - waterSpout
   - bucketWater
   - BatSlot
+  - vacuum
   layers:
   - Default
   - TransparentFX

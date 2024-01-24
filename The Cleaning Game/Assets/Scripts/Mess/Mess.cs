@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mess : MonoBehaviour
 {
+    [SerializeField] Transform messRenderScale;
     public float health = 100f;
 
     /// <summary>
@@ -14,6 +15,7 @@ public class Mess : MonoBehaviour
     public bool Damage(float dmg)
     {
         health -= dmg;
+        rescaleMess();
 
         if (health < 0)
         {
@@ -30,5 +32,13 @@ public class Mess : MonoBehaviour
     public void KillMess()
     {
         GameObject.Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Rescales the mess render so that there is visual feedback on cleaning
+    /// </summary>
+    private void rescaleMess()
+    {
+        messRenderScale.localScale = new Vector3(health / 100, health / 100, health / 100);
     }
 }
