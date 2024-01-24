@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] GameObject target;
 
-    // Update is called once per frame
-    void Update()
+    public void Pressed()
     {
-        
+        Activatable activatable = target.GetComponent(typeof(Activatable)) as Activatable;
+        activatable.Activate();
     }
 }
