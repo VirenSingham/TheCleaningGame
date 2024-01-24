@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
+//using static Unity.VisualScripting.Member;
 
 public class ObjectBehaviour : MonoBehaviour
 {
@@ -27,8 +29,9 @@ public class ObjectBehaviour : MonoBehaviour
     RoomManager roomManager;
     
     GameObject purpleMess;
+    GameObject deviantParticles;
     //Deviant Acts Values
-    
+
     int deviantActCounter = 0; //tracks how many devious acts have succeeded
     
     int spreadCounter = 0; //tracks how many devious acts we've done. If we spread this will reset to zero
@@ -70,7 +73,7 @@ public class ObjectBehaviour : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
 
         purpleMess = GameObject.Find("purple_mess");
-        Debug.Log(purpleMess.name);
+        deviantParticles = GameObject.Find("DeviantPEref");
 
         //create an object that is usedto store references so it can find the RoomManager within the hierarchy. Then set it to be the object attached to the script 
         GameObject roomManagerSearcher = gameObject;
@@ -179,9 +182,6 @@ public class ObjectBehaviour : MonoBehaviour
         {
             rnd = UnityEngine.Random.Range(1, 4);
         }
-
-        //-------------------------------------DEBUG PLEASE DELETE AFTER USE---------------------------------------
-        rnd = 2;
 
 
         //failed deviant acts do nothing and add nothing to the act count.
@@ -354,8 +354,11 @@ public class ObjectBehaviour : MonoBehaviour
 
     void RevealDeviancy()
     {
-        Debug.Log("Showed I'm a Deviant");
-        gameObject.AddComponent<ParticleSystem>();
+        //add particle effect to deviant object based off reference gotten during start
+        GameObject particleEffect = Instantiate(deviantParticles,gameObject.transform);
+        particleEffect.transform.SetParent(gameObject.transform, true);
+        particleEffect.transform.SetPositionAndRotation(gameObject.transform.position, gameObject.transform.rotation);
+        Debug.Log("revealed self");
     }
 
     //Timer functions for randomising deviant activity.
