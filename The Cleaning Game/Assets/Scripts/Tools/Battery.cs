@@ -66,7 +66,6 @@ public class Battery : MonoBehaviour
 
     public void DetatchFromSlot()
     {
-        Debug.Log("Detatched");
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         isSlotted = false;
     }

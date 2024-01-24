@@ -8,6 +8,9 @@ public class Vacuum : MonoBehaviour, Activatable
     [SerializeField] float messDetectionRange;
     [SerializeField] LayerMask messLayer;
     [SerializeField] float VacDamage;
+    [SerializeField] Color OnColor;
+    [SerializeField] Color OffColor;
+    [SerializeField] Material buttonMat;
 
     String vacuumTag = "vacuum";
     bool isOn = false;
@@ -16,6 +19,7 @@ public class Vacuum : MonoBehaviour, Activatable
     public void Activate()
     {
         isOn = !isOn;
+        SetOnSwitchColour();
     }
 
     public void DamageVacuumMesses()
@@ -39,5 +43,18 @@ public class Vacuum : MonoBehaviour, Activatable
     public bool IsOn()
     {
         return isOn;
+    }
+
+    private void SetOnSwitchColour()
+    {
+        if (isOn)
+            buttonMat.color = OffColor;
+        else
+            buttonMat.color = OnColor;
+    }
+
+    private void Awake()
+    {
+        SetOnSwitchColour();
     }
 }
