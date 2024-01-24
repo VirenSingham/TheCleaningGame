@@ -770,7 +770,7 @@ MonoBehaviour:
   crouchMoveSpeed: 2.1
   ButtonLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!54 &5558639816126819086
 Rigidbody:
   m_ObjectHideFlags: 0

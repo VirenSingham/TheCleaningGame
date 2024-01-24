@@ -41,11 +41,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Interact Functionality
+        checkButtonPress();
+    }
+
+    private void checkButtonPress()
+    {
+        RaycastHit hit;
         //check for key press
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, 5f, ButtonLayer))
         {
-            RaycastHit hit;
-            Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit , 5f, ButtonLayer);
             if (hit.collider.gameObject.tag == "Button")
             {
                 hit.collider.gameObject.GetComponentInParent<Elevator>().ButtonPressed();
