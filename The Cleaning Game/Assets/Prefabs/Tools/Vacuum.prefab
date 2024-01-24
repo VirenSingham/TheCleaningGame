@@ -265,7 +265,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.50304395, y: 0.3004371, z: 0.29099464}
   m_Center: {x: -0.0020428598, y: 0.19968694, z: -0.6158962}
---- !u!1 &6369057821259538317
+--- !u!1 &7016826124165655105
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,51 +273,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6194433970289944966}
-  - component: {fileID: 2267281715590134590}
-  m_Layer: 10
-  m_Name: Collidor
+  - component: {fileID: 4113304999283260945}
+  m_Layer: 12
+  m_Name: BatteryLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6194433970289944966
+--- !u!4 &4113304999283260945
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6369057821259538317}
+  m_GameObject: {fileID: 7016826124165655105}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2396776298801453721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2267281715590134590
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6369057821259538317}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.59698486, y: 0.5910568, z: 0.10043335}
-  m_Center: {x: 0.00044631958, y: 0.25277328, z: -0.5433655}
 --- !u!1 &7236460296832661528
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,10 +362,10 @@ GameObject:
   - component: {fileID: 1682590387172095338}
   - component: {fileID: 4728972273021414472}
   - component: {fileID: 9152504194653887229}
-  - component: {fileID: 4738183521164009798}
-  m_Layer: 10
+  - component: {fileID: 8364602742989533699}
+  m_Layer: 12
   m_Name: Battery Slot
-  m_TagString: Untagged
+  m_TagString: BatSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -405,7 +383,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6194433970289944966}
+  - {fileID: 4113304999283260945}
   m_Father: {fileID: 6412226308629810810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8907126878307430470
@@ -1248,7 +1226,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1131
+  m_VersionIndex: 1134
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1331,7 +1309,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7636236474746861382}
   m_Mesh: {fileID: 0}
---- !u!65 &4738183521164009798
+--- !u!65 &8364602742989533699
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1346,12 +1324,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.6, y: 0.6, z: 0.09870303}
-  m_Center: {x: 0, y: 0.25, z: 0.5506485}
+  m_Size: {x: 0.6, y: 0.6, z: 1.2}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &7697532209248908189
 GameObject:
   m_ObjectHideFlags: 0
