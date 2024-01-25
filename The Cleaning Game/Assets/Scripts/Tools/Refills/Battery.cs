@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class Battery : MonoBehaviour
 {
-    [SerializeField] [Range(0, 100)] float charge = 100;
+    [SerializeField] [Range(0, 100)] float charge;
     [SerializeField] float slotDetectionRange = 1f;
     [SerializeField] LayerMask refillLayer;
+    [SerializeField] Transform chargeVisualiser;
 
     bool isSlotted = false;
     string batSlotTag = "BatSlot";
@@ -17,6 +18,23 @@ public class Battery : MonoBehaviour
     {
         if (!isSlotted)
             CheckForBatterySlots();
+
+        ClampCharge();
+        UpdateChargeVisualiser();
+    }
+
+    private void ClampCharge()
+    {
+        if (charge > 100)
+            charge = 100;
+
+        else if (charge < 0)
+            charge = 0;
+    }
+
+    private void UpdateChargeVisualiser()
+    {
+        chargeVisualiser.localScale = new Vector3(charge / 100, 1, 1);
     }
 
     private void CheckForBatterySlots()
