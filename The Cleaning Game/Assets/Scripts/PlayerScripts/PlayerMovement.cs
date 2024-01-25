@@ -6,13 +6,16 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Transform cameraTransform;
+    [SerializeField] Transform groundCheckTransform;
     [SerializeField] float mouseSens = 3f;
     [SerializeField] float walkMoveSpeed = 4f;
     [SerializeField] float crouchMoveSpeed = 4f;
+    [SerializeField] float jumpForce = 10f;
     float currentMoveSpeed;
     bool isCrouching;
 
     Vector2 look;
+    Vector3 xzVelocity;
     Rigidbody rb;
 
     [SerializeField] LayerMask ButtonLayer;
@@ -36,9 +39,9 @@ public class PlayerMovement : MonoBehaviour
         //Crouch Functionality
         //check for key press
         if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
             Crouch();
-        }
+
+        Movement();
 
         //Interact Functionality
         checkButtonPress();
@@ -57,9 +60,53 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Movement()
     {
-        updateMovement();
+        updateXZMovement();
+        ApplyMovement();
+        ApplyJump();
+    }
+
+    private void ApplyJump()
+    {
+        if (Input.GetButtonDown("Jump") && IsGrounded())
+            rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(groundCheckTransform.position, -Vector3.up, 0.1f);
+    }
+
+    private void ApplyMovement()
+    {
+        if (xzVelocity != Vector3.zero)
+        {
+            rb.velocity = new Vector3(xzVelocity.x, rb.velocity.y, xzVelocity.z);
+
+        }
+        else
+        {
+            rb.velocity = rbWithNoXZVel();
+        }
+        /*else if (rb.velocity != rbWithNoXZVel())
+        {
+            Vector3 prevVel = rbWithNoYVel();
+            Vector3 currentVel = rbWithNoYVel() - rbWithNoYVel().normalized * simulatedFriction;
+
+            if (Vector3.Dot(prevVel.normalized, currentVel.normalized) < 0)
+                rb.velocity = rbWithNoXZVel();
+            else
+                rb.velocity = new Vector3(currentVel.x, rb.velocity.y, currentVel.z);
+        }*/
+    }
+
+    /*
+     *  Returns the rigidbody with the x and z component = 0;
+     */
+    private Vector3 rbWithNoXZVel()
+    {
+        return new Vector3(0, rb.velocity.y, 0);
     }
 
     void updateCamera()
@@ -76,17 +123,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void updateMovement()
+    void updateXZMovement()
     {
         var x = Input.GetAxis("Horizontal");
-        var y = Input.GetAxis("Vertical");
+        var z = Input.GetAxis("Vertical");
 
         var input = new Vector3();
-        input += transform.forward * y;
+        input += transform.forward * z;
         input += transform.right * x;
-        input = Vector3.ClampMagnitude(input, 1f);
+        input = input.normalized;
 
-        rb.MovePosition(transform.position + input * currentMoveSpeed * Time.fixedDeltaTime);
+        /*rb.MovePosition(transform.position + input * currentMoveSpeed * Time.fixedDeltaTime);*/
+        xzVelocity = input * currentMoveSpeed;
     }
     
     void Crouch()

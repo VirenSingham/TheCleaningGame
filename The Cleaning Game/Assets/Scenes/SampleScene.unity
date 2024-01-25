@@ -3670,6 +3670,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3526753231970038636, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
+      propertyPath: walkMoveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526753231970038636, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
+      propertyPath: terminalVelocity
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5216320900750755414, guid: e7065b2ea4c607c45809bad584566b9a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -20809,6 +20817,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Battery
       objectReference: {fileID: 0}
+    - target: {fileID: 6998456176773799244, guid: 4ec872ddd368f47468cc643f1efef7bd, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7104718777470331088, guid: 4ec872ddd368f47468cc643f1efef7bd, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -20816,10 +20828,6 @@ PrefabInstance:
     - target: {fileID: 7104718777470331088, guid: 4ec872ddd368f47468cc643f1efef7bd, type: 3}
       propertyPath: m_VersionIndex
       value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 7584322375769728836, guid: 4ec872ddd368f47468cc643f1efef7bd, type: 3}
-      propertyPath: charge
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8166381680635104272, guid: 4ec872ddd368f47468cc643f1efef7bd, type: 3}
       propertyPath: m_Mesh
