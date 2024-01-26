@@ -51,7 +51,7 @@ public class BatterySlot : MonoBehaviour, Activatable
             attatchedBattery.addCharge(charge);
     }
 
-    protected float GetBatteryCharge()
+    public float GetBatteryCharge()
     {
         if (isHoldingBattery())
             return attatchedBattery.getCharge();

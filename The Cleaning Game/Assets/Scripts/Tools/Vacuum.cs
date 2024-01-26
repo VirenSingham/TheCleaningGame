@@ -5,27 +5,53 @@ using UnityEngine;
 
 public class Vacuum : MonoBehaviour, Activatable
 {
-    [SerializeField] float messDetectionRange;
+    [SerializeField] Material buttonMat;
+    [SerializeField] GameObject SuckParticles;
     [SerializeField] LayerMask messLayer;
+    [SerializeField] AudioSource VacuumNoise;
+    [SerializeField] GameObject BatterySlotObject;
+
+    [SerializeField] float messDetectionRange;
     [SerializeField] float VacDamage;
     [SerializeField] Color OnColor;
     [SerializeField] Color OffColor;
-    [SerializeField] Material buttonMat;
-    [SerializeField] GameObject SuckParticles;
 
     String vacuumTag = "vacuum";
+    VacuumSlot batterySlot;
     bool isOn = false;
     int maxChecks = 100;
 
     private void Update()
     {
-        SuckParticles.SetActive(isOn);
+        if (!IsOnWithPower())
+            HandleFX();
     }
 
     public void Activate()
     {
         isOn = !isOn;
+
+        HandleFX();
         SetOnSwitchColour();
+    }
+
+    private void HandleFX()
+    {
+        HandleVacuumAudio();
+        HandleVacuumParticles();
+    }
+
+    private void HandleVacuumParticles()
+    {
+        SuckParticles.SetActive(IsOnWithPower());
+    }
+
+    private void HandleVacuumAudio()
+    {
+        if (IsOnWithPower() && !VacuumNoise.isPlaying)
+            VacuumNoise.Play();
+        else
+            VacuumNoise.Pause();
     }
 
     public void DamageVacuumMesses()
@@ -51,6 +77,11 @@ public class Vacuum : MonoBehaviour, Activatable
         return isOn;
     }
 
+    private bool IsOnWithPower()
+    {
+        return isOn && batterySlot.GetBatteryCharge() > 0;
+    }
+
     private void SetOnSwitchColour()
     {
         if (isOn)
@@ -62,5 +93,7 @@ public class Vacuum : MonoBehaviour, Activatable
     private void Awake()
     {
         SetOnSwitchColour();
+
+        batterySlot = BatterySlotObject.GetComponent<VacuumSlot>();
     }
 }
