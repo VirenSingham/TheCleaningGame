@@ -7,6 +7,7 @@ public class SoapDispenser : MonoBehaviour, Activatable
 {
     [SerializeField] GameObject soapPrefab;
     [SerializeField] Transform soapSpawnLoc;
+    [SerializeField] AudioSource SoapBagDispensedNoise;
     [SerializeField] float spawnForce;
 
     public void Activate()
@@ -16,6 +17,8 @@ public class SoapDispenser : MonoBehaviour, Activatable
 
     private void SpawnSoap()
     {
+        SoapBagDispensedNoise.Play();
+
         GameObject createdSoap = Instantiate(soapPrefab, soapSpawnLoc.position, soapSpawnLoc.rotation);
 
         Rigidbody rb = createdSoap.GetComponent<Rigidbody>();
