@@ -8,18 +8,16 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: dirty_puddle
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: -6465566751694194690, guid: d2ad3d1aadc0ae944b545b7687e09993, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _ALPHAPREMULTIPLY_ON
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -63,18 +61,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
+    - _FlowRate: 0.05
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 3
     - _OcclusionStrength: 1
+    - _Opacity: 0.75
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
+    - _SpeckDensity: 100
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
@@ -82,4 +85,7 @@ Material:
     m_Colors:
     - _Color: {r: 0.4433962, g: 0.36052325, b: 0.27816838, a: 0.9019608}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColors: {r: 0.1320755, g: 0.08278869, b: 0.0267889, a: 0}
+    - _muck: {r: 0.3584906, g: 0.2184769, b: 0.08624065, a: 0}
+    - _wide_muck: {r: 0.4433962, g: 0.2807671, b: 0.04392132, a: 0}
   m_BuildTextureStacks: []
