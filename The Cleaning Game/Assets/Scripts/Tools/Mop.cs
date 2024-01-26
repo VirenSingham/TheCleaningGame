@@ -16,6 +16,7 @@ public class Mop : MonoBehaviour
 
     [SerializeField] AudioSource MoppingSound;
     [SerializeField] AudioSource MopCleanedSound;
+    [SerializeField] AudioSource BucketPlopSound;
 
     [SerializeField] LayerMask messLayer;
     [SerializeField] LayerMask refillLayer;
@@ -93,6 +94,7 @@ public class Mop : MonoBehaviour
         spongeMesh.material = cleanMat;
 
         MopCleanedSound.Play();
+        BucketPlopSound.Play();
 
         dirtyParticles.Pause();
         dirtyParticles.Clear();

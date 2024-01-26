@@ -9,6 +9,8 @@ public class Bucket : MonoBehaviour
     [SerializeField] Transform waterLevelTrans;
     [SerializeField] LayerMask refillLayer;
     [SerializeField] ParticleSystem BucketSplash;
+    [SerializeField] AudioSource BucketFillingSound;
+
     [SerializeField] float startWaterLevel = 0f;
     [SerializeField] float lowThreshold = 0f;
     [SerializeField] float highThreshold = 0.6f;
@@ -77,9 +79,17 @@ public class Bucket : MonoBehaviour
                 Activatable spout = hit.collider.GetComponent(typeof(Activatable)) as Activatable;
                 spout.Activate();
 
+                PlayBucketFillingSound();
+
                 waterLevel += flowRate;
             }
         }
+    }
+
+    private void PlayBucketFillingSound()
+    {
+        if (!BucketFillingSound.isPlaying)
+            BucketFillingSound.Play();
     }
 
     public float getWaterLevel()
