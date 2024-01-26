@@ -22,7 +22,7 @@ public class ScreamTrigger : MonoBehaviour
                 other.gameObject.AddComponent<AudioSource>();
 
                 //generate a random clip.
-                int rnd = Random.Range(0, 8);
+                int rnd = Random.Range(0, 7);
 
                 //change settings
                 other.gameObject.GetComponent<AudioSource>().clip = screamClipList[rnd];
