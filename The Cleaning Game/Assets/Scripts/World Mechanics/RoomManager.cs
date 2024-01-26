@@ -172,6 +172,7 @@ public class RoomManager : MonoBehaviour
         messCount = mess.Count;
         messCount += messModifier;
 
+
         messDisplay.text = messCount.ToString();
         totalMessDisplay.text = totalMessCount.ToString();
     }
