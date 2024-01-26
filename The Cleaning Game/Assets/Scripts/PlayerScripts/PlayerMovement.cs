@@ -80,7 +80,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyMovement()
     {
-        if (xzVelocity != Vector3.zero)
+        rb.velocity = new Vector3(xzVelocity.x, rb.velocity.y, xzVelocity.z);
+        /*if (xzVelocity != Vector3.zero)
         {
             rb.velocity = new Vector3(xzVelocity.x, rb.velocity.y, xzVelocity.z);
 
@@ -88,16 +89,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.velocity = rbWithNoXZVel();
-        }
-        /*else if (rb.velocity != rbWithNoXZVel())
-        {
-            Vector3 prevVel = rbWithNoYVel();
-            Vector3 currentVel = rbWithNoYVel() - rbWithNoYVel().normalized * simulatedFriction;
-
-            if (Vector3.Dot(prevVel.normalized, currentVel.normalized) < 0)
-                rb.velocity = rbWithNoXZVel();
-            else
-                rb.velocity = new Vector3(currentVel.x, rb.velocity.y, currentVel.z);
         }*/
     }
 
@@ -125,8 +116,8 @@ public class PlayerMovement : MonoBehaviour
 
     void updateXZMovement()
     {
-        var x = Input.GetAxis("Horizontal");
-        var z = Input.GetAxis("Vertical");
+        var x = Input.GetAxisRaw("Horizontal");
+        var z = Input.GetAxisRaw("Vertical");
 
         var input = new Vector3();
         input += transform.forward * z;
