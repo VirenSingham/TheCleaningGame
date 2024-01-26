@@ -7,11 +7,12 @@ public class Bucket : MonoBehaviour
 {
     [SerializeField] Transform tapCheck;
     [SerializeField] Transform waterLevelTrans;
+    [SerializeField] LayerMask refillLayer;
+    [SerializeField] ParticleSystem BucketSplash;
     [SerializeField] float startWaterLevel = 0f;
     [SerializeField] float lowThreshold = 0f;
     [SerializeField] float highThreshold = 0.6f;
     [SerializeField] float detectionRange = 0f;
-    [SerializeField] LayerMask refillLayer;
     [SerializeField] float flowRate = 0.1f;
     [SerializeField] float waterLevel;
 
@@ -71,8 +72,13 @@ public class Bucket : MonoBehaviour
     {
         if (Physics.Raycast(new Ray(tapCheck.position, tapCheck.up), out hit, detectionRange, refillLayer))
         {
-            if (hit.collider.CompareTag("waterSpout"))
+            if (hit.collider.CompareTag("waterSpout") && waterLevel < highThreshold)
+            {
+                Activatable spout = hit.collider.GetComponent(typeof(Activatable)) as Activatable;
+                spout.Activate();
+
                 waterLevel += flowRate;
+            }
         }
     }
 
@@ -89,5 +95,10 @@ public class Bucket : MonoBehaviour
     public float getMaxLevel()
     {
         return highThreshold;
+    }
+
+    public void MakeSplash()
+    {
+        BucketSplash.Play();
     }
 }

@@ -15,6 +15,9 @@ public class Mop : MonoBehaviour
     [SerializeField] float waterDetectionRange;
     [SerializeField] float velocityThreshold;
 
+    [SerializeField] ParticleSystem CleanSparkles;
+    [SerializeField] ParticleSystem dirtyParticles;
+
     [SerializeField] LayerMask messLayer;
     [SerializeField] LayerMask refillLayer;
 
@@ -80,8 +83,13 @@ public class Mop : MonoBehaviour
         Bucket bucket = targetedBucket.GetComponent(typeof(Bucket)) as Bucket;
         bucket.setWaterLevel(bucket.getWaterLevel() - WaterConsumptionPercent * bucket.getMaxLevel());
 
+        CleanSparkles.Play();
+        bucket.MakeSplash();
+
         clean = true;
         spongeMesh.material = cleanMat;
+        dirtyParticles.Pause();
+        dirtyParticles.Clear();
     }
 
 
@@ -148,5 +156,6 @@ public class Mop : MonoBehaviour
     {
         clean = false;
         spongeMesh.material = dirtyMat;
+        dirtyParticles.Play();
     }
 }

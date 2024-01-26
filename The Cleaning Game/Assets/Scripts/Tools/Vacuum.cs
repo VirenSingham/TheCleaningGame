@@ -11,10 +11,16 @@ public class Vacuum : MonoBehaviour, Activatable
     [SerializeField] Color OnColor;
     [SerializeField] Color OffColor;
     [SerializeField] Material buttonMat;
+    [SerializeField] GameObject SuckParticles;
 
     String vacuumTag = "vacuum";
     bool isOn = false;
     int maxChecks = 100;
+
+    private void Update()
+    {
+        SuckParticles.SetActive(isOn);
+    }
 
     public void Activate()
     {
