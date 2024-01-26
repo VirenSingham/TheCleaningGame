@@ -10,6 +10,7 @@ public class purple_mess : MonoBehaviour
 
     [SerializeField] LayerMask messLayer;
     [SerializeField] LayerMask pickupLayer;
+    [SerializeField] AudioSource LaserNoiseSource;
 
     [SerializeField] float hitForce;
     [SerializeField] float hitRadius;
@@ -45,6 +46,7 @@ public class purple_mess : MonoBehaviour
     private void ShootLaser()
     {
         laser.Play();
+        LaserNoiseSource.Play();
     }
 
     void PushClosePickups()
