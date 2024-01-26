@@ -11,15 +11,18 @@ public class Mop : MonoBehaviour
 
     [SerializeField] Transform spongeTrans;
     [SerializeField] Rigidbody spongeRb;
-    [SerializeField] float dirtDetectionRange;
-    [SerializeField] float waterDetectionRange;
-    [SerializeField] float velocityThreshold;
-
     [SerializeField] ParticleSystem CleanSparkles;
     [SerializeField] ParticleSystem dirtyParticles;
 
+    [SerializeField] AudioSource MoppingSound;
+    [SerializeField] AudioSource MopCleanedSound;
+
     [SerializeField] LayerMask messLayer;
     [SerializeField] LayerMask refillLayer;
+
+    [SerializeField] float dirtDetectionRange;
+    [SerializeField] float waterDetectionRange;
+    [SerializeField] float velocityThreshold;
 
     [SerializeField] float MopDamage;
     [SerializeField] [Range(0,1)] float WaterConsumptionPercent;
@@ -88,6 +91,9 @@ public class Mop : MonoBehaviour
 
         clean = true;
         spongeMesh.material = cleanMat;
+
+        MopCleanedSound.Play();
+
         dirtyParticles.Pause();
         dirtyParticles.Clear();
     }
@@ -109,12 +115,19 @@ public class Mop : MonoBehaviour
      */
     private void cleanPuddle()
     {
+        PlayMoppingSound();
         for (int i = 0; i < mopables.Count; i++)
         {
             Mess mess = mopables[i].GetComponent(typeof(Mess)) as Mess;
             if (mess.Damage(MopDamage))
                 makeDirty();
         }
+    }
+
+    private void PlayMoppingSound()
+    {
+        if (!MoppingSound.isPlaying)
+            MoppingSound.Play();
     }
 
     /*
