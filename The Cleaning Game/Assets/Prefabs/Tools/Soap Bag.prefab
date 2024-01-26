@@ -2668,3 +2668,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   MaxExplosionDamage: 150
+  soapExplosion: {fileID: 8224551445202176809, guid: bee05536b05f4794bbb8186861f679e5, type: 3}

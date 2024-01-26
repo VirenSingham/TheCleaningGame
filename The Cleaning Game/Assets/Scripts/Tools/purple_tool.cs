@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class purple_mess : MonoBehaviour
     [SerializeField] float hitForce;
     [SerializeField] float hitRadius;
 
+    [SerializeField] ParticleSystem laser;
+
 
     RaycastHit hit;
 
@@ -29,10 +32,16 @@ public class purple_mess : MonoBehaviour
     {
         if (isPurpleMess())
         {
+            ShootLaser();
             PushClosePickups();
             Mess mess = hit.collider.gameObject.GetComponent(typeof(Mess)) as Mess;
             mess.KillMess();
         }
+    }
+
+    private void ShootLaser()
+    {
+        laser.Play();
     }
 
     void PushClosePickups()

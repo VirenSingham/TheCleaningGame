@@ -10,6 +10,7 @@ public class Soap : MonoBehaviour
     [SerializeField] float ExplosionRange;
     [SerializeField] LayerMask messLayer;
     [SerializeField] float MaxExplosionDamage;
+    [SerializeField] GameObject soapExplosion;
 
     Rigidbody rb;
     String soapTag = "soap";
@@ -25,8 +26,14 @@ public class Soap : MonoBehaviour
         if (rb.velocity.magnitude > breakVelocity && CheckImpact())
         {
             DamageSoapables();
+            SpawnSoapParticles();
             GameObject.Destroy(gameObject);
         }
+    }
+
+    private void SpawnSoapParticles()
+    {
+        Instantiate(soapExplosion, transform.position, transform.rotation);
     }
 
     /*

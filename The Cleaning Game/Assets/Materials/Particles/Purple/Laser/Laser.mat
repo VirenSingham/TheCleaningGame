@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3073305118498823254
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 0
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterParticale
-  m_Shader: {fileID: -6465566751694194690, guid: feba84f9eb38cfe4e94885fd942b5fc6, type: 3}
+  m_Name: Laser
+  m_Shader: {fileID: -6465566751694194690, guid: 412963f22fee5e14fb6da5b4c6e9091a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -87,16 +74,28 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RippleRate: 1.69
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Transparency: 0.65
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - _BeamCol: {r: 0.4706382, g: 0, b: 0.6886792, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RippleCol: {r: 0.8813307, g: 3.159701, b: 3.663571, a: 0}
-    - _WaterCol: {r: 0, g: 0.7069923, b: 0.990566, a: 0}
+    - _HazeCol: {r: 0.3293864, g: 0.09411763, b: 0.6980392, a: 0}
+    - _insideBeam: {r: 0.1732303, g: 0.1074226, b: 0.3207547, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &1902948378902977338
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
