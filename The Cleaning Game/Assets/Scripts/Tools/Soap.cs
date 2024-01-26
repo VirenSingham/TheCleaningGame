@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class Soap : MonoBehaviour
 {
+    [SerializeField] LayerMask messLayer;
+    [SerializeField] GameObject soapExplosion;
+    [SerializeField] float MaxExplosionDamage;
     [SerializeField] float breakVelocity;
     [SerializeField] float ImpactRange;
     [SerializeField] float ExplosionRange;
-    [SerializeField] LayerMask messLayer;
-    [SerializeField] float MaxExplosionDamage;
-    [SerializeField] GameObject soapExplosion;
+    [SerializeField] float CamShakeIntensity;
+    [SerializeField] float CamShakeTime;
 
     Rigidbody rb;
     String soapTag = "soap";
@@ -27,6 +29,7 @@ public class Soap : MonoBehaviour
         {
             DamageSoapables();
             SpawnSoapParticles();
+            CameraShake.Instance.ShakeCamera(CamShakeIntensity, CamShakeTime);
             GameObject.Destroy(gameObject);
         }
     }

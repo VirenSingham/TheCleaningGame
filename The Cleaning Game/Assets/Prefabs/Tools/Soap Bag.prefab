@@ -2661,11 +2661,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6442b5b25f1d474f8f2f02676feb2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakVelocity: 10
-  ImpactRange: 0.5
-  ExplosionRange: 5
   messLayer:
     serializedVersion: 2
     m_Bits: 2048
-  MaxExplosionDamage: 150
   soapExplosion: {fileID: 8224551445202176809, guid: bee05536b05f4794bbb8186861f679e5, type: 3}
+  MaxExplosionDamage: 150
+  breakVelocity: 10
+  ImpactRange: 0.5
+  ExplosionRange: 5
+  CamShakeIntensity: 2
+  CamShakeTime: 0.5

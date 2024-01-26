@@ -6,17 +6,17 @@ using UnityEngine;
 public class purple_mess : MonoBehaviour
 {
     [SerializeField] Transform detectorTransform;
-    [SerializeField] float detectionRange;
-    [SerializeField] int MaxPropsToPush;
+    [SerializeField] ParticleSystem laser;
 
     [SerializeField] LayerMask messLayer;
     [SerializeField] LayerMask pickupLayer;
 
     [SerializeField] float hitForce;
     [SerializeField] float hitRadius;
-
-    [SerializeField] ParticleSystem laser;
-
+    [SerializeField] float detectionRange;
+    [SerializeField] int MaxPropsToPush;
+    [SerializeField] float CameraShakeIntensity;
+    [SerializeField] float CameraShakeTime;
 
     RaycastHit hit;
 
@@ -34,6 +34,9 @@ public class purple_mess : MonoBehaviour
         {
             ShootLaser();
             PushClosePickups();
+
+            CameraShake.Instance.ShakeCamera(CameraShakeIntensity, CameraShakeTime);
+
             Mess mess = hit.collider.gameObject.GetComponent(typeof(Mess)) as Mess;
             mess.KillMess();
         }

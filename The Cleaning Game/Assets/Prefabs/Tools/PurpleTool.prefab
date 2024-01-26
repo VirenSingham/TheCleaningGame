@@ -1673,8 +1673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectorTransform: {fileID: 2677023966849661760}
-  detectionRange: 0.5
-  MaxPropsToPush: 900
+  laser: {fileID: 2381927468533942509}
   messLayer:
     serializedVersion: 2
     m_Bits: 2048
@@ -1683,7 +1682,10 @@ MonoBehaviour:
     m_Bits: 1024
   hitForce: 1000
   hitRadius: 5
-  laser: {fileID: 2381927468533942509}
+  detectionRange: 0.5
+  MaxPropsToPush: 900
+  CameraShakeIntensity: 2
+  CameraShakeTime: 1
 --- !u!1 &6523959480314545413
 GameObject:
   m_ObjectHideFlags: 0
