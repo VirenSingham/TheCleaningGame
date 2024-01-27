@@ -43,7 +43,7 @@ public class ObjectDestroyer : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.tag == "Player")
+        else if (other.gameObject.tag == "Player" || other.gameObject.tag == "tool")
         {
             //if we want a death state for the player killing themselves it would go here
             other.gameObject.transform.SetPositionAndRotation(teleportPoint.position, teleportPoint.rotation);

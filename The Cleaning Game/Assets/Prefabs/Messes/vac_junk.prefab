@@ -16575,16 +16575,36 @@ PrefabInstance:
     m_TransformParent: {fileID: 2947077921316259853}
     m_Modifications:
     - target: {fileID: 710582470825126533, guid: a75cc6ec11923e44fbb7bc01a6ceb612, type: 3}
+      propertyPath: MaxDistance
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 710582470825126533, guid: a75cc6ec11923e44fbb7bc01a6ceb612, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710582470825126533, guid: a75cc6ec11923e44fbb7bc01a6ceb612, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1981773223161515941, guid: a75cc6ec11923e44fbb7bc01a6ceb612, type: 3}
       propertyPath: m_Name
       value: TrashAudio
       objectReference: {fileID: 0}
     - target: {fileID: 2420843547662209637, guid: a75cc6ec11923e44fbb7bc01a6ceb612, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420843547662209637, guid: a75cc6ec11923e44fbb7bc01a6ceb612, type: 3}
+      propertyPath: MaxDistance
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420843547662209637, guid: a75cc6ec11923e44fbb7bc01a6ceb612, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420843547662209637, guid: a75cc6ec11923e44fbb7bc01a6ceb612, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8737977334066455437, guid: a75cc6ec11923e44fbb7bc01a6ceb612, type: 3}
       propertyPath: m_LocalPosition.x

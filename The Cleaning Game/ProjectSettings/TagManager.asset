@@ -17,6 +17,7 @@ TagManager:
   - BatSlot
   - vacuum
   - soap
+  - tool
   layers:
   - Default
   - TransparentFX

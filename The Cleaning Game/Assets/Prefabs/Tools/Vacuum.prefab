@@ -50,10 +50,10 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 114
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 150
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -88,7 +88,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -940,7 +940,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 15
+  m_VersionIndex: 18
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1680,7 +1680,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 15
+  m_VersionIndex: 18
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2762,7 +2762,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1137
+  m_VersionIndex: 1140
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4144,7 +4144,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 45
+  m_VersionIndex: 48
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4263,6 +4263,7 @@ GameObject:
   - component: {fileID: 6412226308629810810}
   - component: {fileID: 5196427164200065456}
   - component: {fileID: 1060999248306038657}
+  - component: {fileID: 6302019902843848132}
   m_Layer: 10
   m_Name: Vacuum
   m_TagString: Untagged
@@ -4341,6 +4342,27 @@ MonoBehaviour:
   VacDamage: 0.5
   OnColor: {r: 0.21960784, g: 1, b: 0, a: 1}
   OffColor: {r: 0.8584906, g: 0.052643314, b: 0.052643314, a: 0}
+--- !u!65 &6302019902843848132
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7782965313225540919}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.06, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8022452221975629040
 GameObject:
   m_ObjectHideFlags: 0
@@ -4508,6 +4530,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3998057134178146186}
     m_Modifications:
+    - target: {fileID: 7013464345321065455, guid: adb8af63985e0784c891ec24feac6ea2, type: 3}
+      propertyPath: Priority
+      value: 114
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013464345321065455, guid: adb8af63985e0784c891ec24feac6ea2, type: 3}
+      propertyPath: MaxDistance
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013464345321065455, guid: adb8af63985e0784c891ec24feac6ea2, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7279710203111846875, guid: adb8af63985e0784c891ec24feac6ea2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
