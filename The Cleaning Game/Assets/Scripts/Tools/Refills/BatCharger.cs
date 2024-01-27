@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BatCharger : BatterySlot
 {
-    [SerializeField] float chargeRate;
     [SerializeField] ParticleSystem chargingParticles;
+    [SerializeField] AudioSource ChargingNoise;
+    [SerializeField] float chargeRate;
 
     private void FixedUpdate()
     {
@@ -13,11 +14,16 @@ public class BatCharger : BatterySlot
 
         if (isHoldingBattery() && GetBatteryCharge() < 100)
         {
+            if (!ChargingNoise.isPlaying)
+                ChargingNoise.Play();
+
             if (!chargingParticles.isPlaying)
                 chargingParticles.Play();
         }
         else
         {
+            ChargingNoise.Pause();
+
             chargingParticles.Pause();
             chargingParticles.Clear();
         }

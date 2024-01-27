@@ -2665,6 +2665,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   soapExplosion: {fileID: 8224551445202176809, guid: bee05536b05f4794bbb8186861f679e5, type: 3}
+  SoapBagNoise: {fileID: 2741375280270029240, guid: 3ecc479eb405343458877a631ede7a7e, type: 3}
   MaxExplosionDamage: 150
   breakVelocity: 10
   ImpactRange: 0.5

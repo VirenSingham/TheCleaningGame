@@ -6,6 +6,7 @@ using UnityEngine;
 public class BatterySlot : MonoBehaviour, Activatable
 {
     [SerializeField] Transform batteryPos;
+    [SerializeField] AudioSource BatteryClickIn;
     [SerializeField] float deactiveTimeLimit;
 
     Battery attatchedBattery = null;
@@ -38,6 +39,13 @@ public class BatterySlot : MonoBehaviour, Activatable
     {
         attatchedBattery = battery;
         isHoldingBat = true;
+
+        PlayBatteryClickInSound();
+    }
+
+    private void PlayBatteryClickInSound()
+    {
+        BatteryClickIn.Play();
     }
 
     public bool isHoldingBattery()

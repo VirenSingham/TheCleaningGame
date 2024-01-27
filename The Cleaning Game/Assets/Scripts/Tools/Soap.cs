@@ -7,6 +7,8 @@ public class Soap : MonoBehaviour
 {
     [SerializeField] LayerMask messLayer;
     [SerializeField] GameObject soapExplosion;
+    [SerializeField] GameObject SoapBagNoise;
+
     [SerializeField] float MaxExplosionDamage;
     [SerializeField] float breakVelocity;
     [SerializeField] float ImpactRange;
@@ -28,15 +30,16 @@ public class Soap : MonoBehaviour
         if (rb.velocity.magnitude > breakVelocity && CheckImpact())
         {
             DamageSoapables();
-            SpawnSoapParticles();
+            SpawnSoapFX();
             CameraShake.Instance.ShakeCamera(CamShakeIntensity, CamShakeTime);
             GameObject.Destroy(gameObject);
         }
     }
 
-    private void SpawnSoapParticles()
+    private void SpawnSoapFX()
     {
         Instantiate(soapExplosion, transform.position, transform.rotation);
+        Instantiate(SoapBagNoise, transform.position, transform.rotation);
     }
 
     /*
